@@ -28,12 +28,10 @@
             </p>
 
             <p>
-                <strong>Theme:</strong>
-                <button onclick="setTheme('auto')" id="theme-auto">Auto</button>
-                <button onclick="setTheme('light')" id="theme-light">
-                    Light
-                </button>
-                <button onclick="setTheme('dark')" id="theme-dark">Dark</button>
+                <small
+                    >Automatically adapts to your system's light/dark mode
+                    preference.</small
+                >
             </p>
         </header>
 
@@ -533,38 +531,5 @@ console.log(greet("juice.css"));</code></pre>
                 >
             </p>
         </footer>
-
-        <script>
-            // Simple theme switcher using color-scheme
-            function setTheme(theme) {
-                if (theme === "auto") {
-                    document.documentElement.removeAttribute("data-theme");
-                    localStorage.removeItem("theme");
-                } else {
-                    document.documentElement.setAttribute("data-theme", theme);
-                    localStorage.setItem("theme", theme);
-                }
-                updateActiveButton(theme);
-            }
-
-            function updateActiveButton(theme) {
-                document.querySelectorAll('[id^="theme-"]').forEach((btn) => {
-                    btn.style.opacity = "0.6";
-                    btn.style.fontWeight = "normal";
-                });
-                const activeBtn = document.getElementById("theme-" + theme);
-                if (activeBtn) {
-                    activeBtn.style.opacity = "1";
-                    activeBtn.style.fontWeight = "600";
-                }
-            }
-
-            // Load saved theme on page load
-            const savedTheme = localStorage.getItem("theme") || "auto";
-            if (savedTheme !== "auto") {
-                document.documentElement.setAttribute("data-theme", savedTheme);
-            }
-            updateActiveButton(savedTheme);
-        </script>
     </body>
 </html>
