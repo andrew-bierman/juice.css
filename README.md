@@ -44,19 +44,19 @@ Just add this to your `<head>`:
 Automatically switches between light and dark based on system preference:
 
 ```html
-<link rel="stylesheet" href="https://juice.css/juice.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@latest/out/juice.css">
 ```
 
 ### Always Light
 
 ```html
-<link rel="stylesheet" href="https://juice.css/juice-light.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@latest/out/juice-light.css">
 ```
 
 ### Always Dark
 
 ```html
-<link rel="stylesheet" href="https://juice.css/juice-dark.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@latest/out/juice-dark.css">
 ```
 
 ## Theming
@@ -121,8 +121,8 @@ Built with [Bun](https://bun.sh) - zero dependencies!
 curl -fsSL https://bun.sh/install | bash
 
 # Clone the repo
-git clone https://github.com/andrew-bierman/juice.git
-cd juice
+git clone https://github.com/andrew-bierman/juice.css.git
+cd juice.css
 
 # Start dev server with hot reload
 bun dev
@@ -133,11 +133,12 @@ bun run build
 
 ## Performance
 
-juice.css is served via **Cloudflare's global CDN** with:
-- 35ms average latency (vs 40ms for jsDelivr)
+juice.css is served via **jsDelivr's global CDN** with:
+- Multi-CDN approach (Cloudflare, Fastly, StackPath)
 - 200+ edge locations worldwide
 - Automatic caching and compression
-- 99.99% uptime SLA
+- 99.9% uptime SLA
+- Free forever for open-source projects
 
 ## Browser Support
 

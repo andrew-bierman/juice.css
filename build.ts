@@ -17,7 +17,7 @@ const header = `/**
  * @version 1.0.0
  * @license MIT
  * @author andrew-bierman
- * @repository https://github.com/andrew-bierman/juice
+ * @repository https://github.com/andrew-bierman/juice.css
  */
 
 `;
