@@ -26,6 +26,7 @@ const header = `/**
 const lightVars = readFileSync("src/variables-light.css", "utf-8");
 const darkVars = readFileSync("src/variables-dark.css", "utf-8");
 const base = readFileSync("src/base.css", "utf-8");
+const indexHTML = readFileSync("src/index.html", "utf-8");
 
 // Ensure out directory exists
 mkdirSync("out", { recursive: true });
@@ -48,7 +49,12 @@ writeFileSync("out/juice-light.css", lightCSS);
 const darkCSS = header + darkVars + "\n\n" + base;
 writeFileSync("out/juice-dark.css", darkCSS);
 
+// Build index.html for production (fix CSS path)
+const prodHTML = indexHTML.replace("juice-dev.css", "juice.css");
+writeFileSync("out/index.html", prodHTML);
+
 console.log("✅ Build complete!");
 console.log("   • out/juice.css (auto light/dark)");
 console.log("   • out/juice-light.css");
 console.log("   • out/juice-dark.css");
+console.log("   • out/index.html (production demo)");

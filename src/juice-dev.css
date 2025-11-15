@@ -1,0 +1,8 @@
+/* Development version - imports source files directly */
+@import "variables-light.css";
+
+@media (prefers-color-scheme: dark) {
+  @import "variables-dark.css";
+}
+
+@import "base.css";
