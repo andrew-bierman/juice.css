@@ -1,0 +1,15 @@
+{
+  "name": "juice.css",
+  "version": "1.0.0",
+  "description": "A classless CSS framework inspired by Apple's design system",
+  "scripts": {
+    "dev": "bunx serve . --hot"
+  },
+  "keywords": [
+    "css",
+    "classless",
+    "apple"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
