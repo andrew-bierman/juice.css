@@ -538,10 +538,10 @@ console.log(greet("juice.css"));</code></pre>
             // Simple theme switcher using color-scheme
             function setTheme(theme) {
                 if (theme === "auto") {
-                    document.documentElement.style.colorScheme = "";
+                    document.documentElement.removeAttribute("data-theme");
                     localStorage.removeItem("theme");
                 } else {
-                    document.documentElement.style.colorScheme = theme;
+                    document.documentElement.setAttribute("data-theme", theme);
                     localStorage.setItem("theme", theme);
                 }
                 updateActiveButton(theme);
@@ -562,7 +562,7 @@ console.log(greet("juice.css"));</code></pre>
             // Load saved theme on page load
             const savedTheme = localStorage.getItem("theme") || "auto";
             if (savedTheme !== "auto") {
-                document.documentElement.style.colorScheme = savedTheme;
+                document.documentElement.setAttribute("data-theme", savedTheme);
             }
             updateActiveButton(savedTheme);
         </script>
