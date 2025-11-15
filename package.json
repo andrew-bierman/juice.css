@@ -4,7 +4,13 @@
   "description": "A classless CSS framework inspired by Apple's design system",
   "scripts": {
     "dev": "bun src/index.html",
-    "build": "bun run build.ts"
+    "build": "bun run build.ts",
+    "format": "biome format --write",
+    "format:files": "biome format --write",
+    "lint": "biome lint --write",
+    "lint:files": "biome lint --write",
+    "check": "biome check --write",
+    "check:files": "biome check --write"
   },
   "keywords": [
     "css",
