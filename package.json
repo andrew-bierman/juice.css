@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A classless CSS framework inspired by Apple's design system",
   "scripts": {
-    "dev": "bun src/index.html",
+    "dev": "bun out/index.html",
     "build": "bun run build.ts"
   },
   "keywords": [
