@@ -27,8 +27,8 @@ const lightVars = readFileSync("src/variables-light.css", "utf-8");
 const darkVars = readFileSync("src/variables-dark.css", "utf-8");
 const base = readFileSync("src/base.css", "utf-8");
 
-// Ensure dist directory exists
-mkdirSync("dist", { recursive: true });
+// Ensure out directory exists
+mkdirSync("out", { recursive: true });
 
 // Build juice.css (auto - switches between light/dark)
 const autoCSS =
@@ -38,17 +38,17 @@ const autoCSS =
   darkVars +
   "\n}\n\n" +
   base;
-writeFileSync("dist/juice.css", autoCSS);
+writeFileSync("out/juice.css", autoCSS);
 
 // Build juice-light.css (always light)
 const lightCSS = header + lightVars + "\n\n" + base;
-writeFileSync("dist/juice-light.css", lightCSS);
+writeFileSync("out/juice-light.css", lightCSS);
 
 // Build juice-dark.css (always dark)
 const darkCSS = header + darkVars + "\n\n" + base;
-writeFileSync("dist/juice-dark.css", darkCSS);
+writeFileSync("out/juice-dark.css", darkCSS);
 
 console.log("✅ Build complete!");
-console.log("   • dist/juice.css (auto light/dark)");
-console.log("   • dist/juice-light.css");
-console.log("   • dist/juice-dark.css");
+console.log("   • out/juice.css (auto light/dark)");
+console.log("   • out/juice-light.css");
+console.log("   • out/juice-dark.css");

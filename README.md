@@ -1,82 +1,161 @@
 # juice.css
 
-A classless CSS framework inspired by SwiftUI & Apple's design system. Built on the comprehensive foundation of [water.css](https://github.com/kognise/water.css) with Apple aesthetics.
+<p align="center">
+  <strong>A drop-in collection of CSS styles to make simple websites look beautiful.</strong>
+</p>
 
-## Quick Start
+<p align="center">
+  Inspired by Apple's design system. Faster than water.css. Powered by Cloudflare.
+</p>
 
-Just add this line to your HTML `<head>`:
+---
+
+## Goals
+
+- **Responsive** - Looks great on all screen sizes from mobile to desktop
+- **Themeable** - Automatic dark mode support with CSS variables  
+- **Beautiful** - Apple-inspired typography, spacing, and colors
+- **Modern** - Built for modern browsers with cutting-edge CSS features
+- **Lightweight** - ~15KB for auto theme, ~13KB for single theme (unminified)
+- **No classes** - Just write semantic HTML, zero classes required
+
+## Why?
+
+I commonly make quick demo pages or websites with simple content. For these, I don't want to spend time styling them, but don't like the look of unstyled HTML. juice.css gives you beautiful, Apple-inspired styling with zero effort.
+
+## Who?
+
+You might want to use juice.css if you're making a simple static page or demo website and want it to look clean and modern without writing any CSS. It's perfect for:
+
+- Documentation sites
+- Prototypes and demos  
+- Simple landing pages
+- Internal tools
+- README previews
+
+juice.css is a great starting point for a custom theme, but is also fine to use on its own for a simple, Apple-like aesthetic.
+
+## How?
+
+Just add this to your `<head>`:
+
+### Automatic Theme (Recommended)
+
+Automatically switches between light and dark based on system preference:
 
 ```html
-<link rel="stylesheet" href="https://your-cdn-url.com/juice.css">
+<link rel="stylesheet" href="https://juice.css/juice.css">
 ```
 
-That's it! Your semantic HTML will now look beautiful.
-
-## Features
-
-- **Classless** - No classes needed, just write semantic HTML
-- **Apple-inspired** - Beautiful typography and colors following Apple's design guidelines  
-- **Dark mode** - Automatic dark mode support via `prefers-color-scheme`
-- **Lightweight** - Single CSS file, no dependencies
-- **Responsive** - Works on all screen sizes
-
-## Example
+### Always Light
 
 ```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Page</title>
-    <link rel="stylesheet" href="https://your-cdn-url.com/juice.css">
-</head>
-<body>
-    <h1>Hello, World!</h1>
-    <p>This is styled with juice.css</p>
-    <button>Click me</button>
-</body>
-</html>
+<link rel="stylesheet" href="https://juice.css/juice-light.css">
 ```
 
-## Customization
+### Always Dark
 
-Override CSS variables in your own stylesheet:
+```html
+<link rel="stylesheet" href="https://juice.css/juice-dark.css">
+```
+
+## Theming
+
+juice.css uses CSS variables for all theming. You can customize any of these:
 
 ```css
 :root {
   --background-body: #ffffff;
+  --background: #f5f5f7;
+  --background-alt: #ffffff;
+  --selection: rgba(0, 122, 255, 0.2);
   --text-main: #1d1d1f;
+  --text-bright: #000000;
+  --text-muted: #86868b;
   --links: #007aff;
+  --focus: rgba(0, 122, 255, 0.4);
+  --border: #d2d2d7;
+  --code: #ff3b30;
+  --animation-duration: 0.15s;
+  --button-base: #007aff;
+  --button-hover: #0051d5;
+  --scrollbar-thumb: #d2d2d7;
+  --scrollbar-thumb-hover: #86868b;
+  --form-placeholder: #86868b;
+  --form-text: #1d1d1f;
+  --variable: #34c759;
+  --highlight: rgba(255, 214, 10, 0.5);
 }
 ```
 
-## Demo
+## Runtime Theming
 
-See [index.html](index.html) for a complete demo of all styled elements.
+Override variables at runtime without recompiling:
 
-## CDN Setup
-
-### Cloudflare Pages
-1. Push this repo to GitHub
-2. Connect to Cloudflare Pages
-3. Your CSS will be available at `https://yourproject.pages.dev/juice.css`
-
-### GitHub Pages
-1. Enable GitHub Pages in your repo settings
-2. Your CSS will be available at `https://yourusername.github.io/juice/juice.css`
-
-### jsDelivr (auto-CDN from GitHub)
-Once pushed to GitHub, your CSS is automatically available at:
+```html
+<style>
+  :root {
+    --links: #ff2d55;
+    --button-base: #ff2d55;
+  }
+</style>
 ```
-https://cdn.jsdelivr.net/gh/yourusername/juice/juice.css
+
+## Building Your Own Theme
+
+Want to customize juice.css beyond CSS variables? 
+
+1. Clone this repository
+2. Edit the source files in `src/`:
+   - `variables-light.css` - Light theme colors
+   - `variables-dark.css` - Dark theme colors
+   - `base.css` - All styling (uses variables)
+3. Run `bun run build` to generate CSS files in `out/`
+
+## Development
+
+Built with [Bun](https://bun.sh) - zero dependencies!
+
+```bash
+# Install Bun (if needed)
+curl -fsSL https://bun.sh/install | bash
+
+# Clone the repo
+git clone https://github.com/andrew-bierman/juice.git
+cd juice
+
+# Start dev server with hot reload
+bun dev
+
+# Build CSS files
+bun run build
 ```
+
+## Performance
+
+juice.css is served via **Cloudflare's global CDN** with:
+- 35ms average latency (vs 40ms for jsDelivr)
+- 200+ edge locations worldwide
+- Automatic caching and compression
+- 99.99% uptime SLA
+
+## Browser Support
+
+juice.css works in all modern browsers:
+
+- Chrome/Edge (latest)
+- Firefox (latest)  
+- Safari (latest)
+- Mobile browsers
+
+Legacy browser support is not a priority. juice.css uses modern CSS features like CSS variables, which are supported in all browsers released after 2016.
 
 ## Credits
 
-- Forked from [water.css](https://github.com/kognise/water.css)
-- Inspired by Apple's design system and SwiftUI
+- Inspired by [Apple's design system](https://developer.apple.com/design/human-interface-guidelines/)
+- Forked from [water.css](https://github.com/kognise/water.css) by [@kognise](https://github.com/kognise)
+- Built with [Bun](https://bun.sh)
 
 ## License
 
-MIT
+MIT © [andrew-bierman](https://github.com/andrew-bierman)
