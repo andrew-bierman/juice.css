@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  Inspired by Apple's design system. Faster than water.css. Powered by Cloudflare.
+  🧃 Inspired by Apple's design system. Served via jsDelivr CDN.
 </p>
 
 ---
