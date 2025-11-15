@@ -177,9 +177,13 @@ Legacy browser support is not a priority. juice.css uses modern CSS features lik
 
 ## Credits
 
-- Inspired by [Apple's design system](https://developer.apple.com/design/human-interface-guidelines/)
-- Forked from [water.css](https://github.com/kognise/water.css) by [@kognise](https://github.com/kognise)
-- Built with [Bun](https://bun.sh)
+juice.css builds upon the excellent work of:
+
+- [water.css](https://github.com/kognise/water.css) by [@kognise](https://github.com/kognise) - The original classless CSS framework that inspired this project
+- [Apple's Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/) - Design principles and color system
+- [Bun](https://bun.sh) - Lightning-fast JavaScript runtime used for building
+
+Special thanks to the water.css community for creating such a solid foundation!
 
 ## License
 

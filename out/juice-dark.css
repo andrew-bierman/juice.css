@@ -63,6 +63,8 @@
 html {
     scrollbar-color: var(--scrollbar-thumb) var(--background-body);
     scrollbar-width: thin;
+    background: var(--background-body);
+    color: var(--text-main);
 }
 
 body {
