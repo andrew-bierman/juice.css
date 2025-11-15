@@ -65,26 +65,50 @@ juice.css uses CSS variables for all theming. You can customize any of these:
 
 ```css
 :root {
+  /* Backgrounds */
   --background-body: #ffffff;
   --background: #f5f5f7;
   --background-alt: #ffffff;
-  --selection: rgba(0, 122, 255, 0.2);
+  
+  /* Text colors */
   --text-main: #1d1d1f;
   --text-bright: #000000;
   --text-muted: #86868b;
+  
+  /* Interactive elements */
   --links: #007aff;
   --focus: rgba(0, 122, 255, 0.4);
-  --border: #d2d2d7;
-  --code: #ff3b30;
-  --animation-duration: 0.15s;
+  --selection: rgba(0, 122, 255, 0.2);
+  
+  /* Buttons */
   --button-base: #007aff;
   --button-hover: #0051d5;
-  --scrollbar-thumb: #d2d2d7;
-  --scrollbar-thumb-hover: #86868b;
-  --form-placeholder: #86868b;
+  --button-text: #ffffff;
+  
+  /* Forms */
   --form-text: #1d1d1f;
+  --form-placeholder: #86868b;
+  
+  /* Borders & dividers */
+  --border: #d2d2d7;
+  
+  /* Code blocks */
+  --code: #ff3b30;
   --variable: #34c759;
   --highlight: rgba(255, 214, 10, 0.5);
+  
+  /* UI elements */
+  --scrollbar-thumb: #d2d2d7;
+  --scrollbar-thumb-hover: #86868b;
+  --slider-thumb: #ffffff;
+  
+  /* Semantic colors */
+  --success: #34c759;
+  --warning: #ff9500;
+  --error: #ff3b30;
+  
+  /* Animation */
+  --animation-duration: 0.15s;
 }
 ```
 
