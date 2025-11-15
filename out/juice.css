@@ -373,14 +373,17 @@ input[type="radio"] {
     cursor: pointer;
 }
 
-input,
-select {
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
     display: block;
+    width: 100%;
 }
 
 [type="checkbox"],
 [type="radio"] {
-    display: initial;
+    display: inline-block;
+    width: auto;
 }
 
 input,
@@ -397,8 +400,15 @@ select {
     border: var(--border-thin) solid var(--border);
     border-radius: var(--radius-md);
     outline: none;
-    min-height: var(--tap-target-min);
     box-sizing: border-box;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="color"]):not(
+        [type="range"]
+    ),
+button,
+select {
+    min-height: var(--tap-target-min);
 }
 
 button {
@@ -408,7 +418,6 @@ button {
     font-weight: var(--font-weight-semibold);
     border: none;
     box-shadow: none;
-    min-height: var(--tap-target-min);
     cursor: pointer;
 }
 
@@ -441,8 +450,9 @@ input[type="button"]:active {
 }
 
 input[type="color"] {
-    min-height: 2rem;
-    padding: 8px;
+    min-height: var(--tap-target-min);
+    width: var(--tap-target-min);
+    padding: var(--space-2);
     cursor: pointer;
 }
 
@@ -450,6 +460,8 @@ input[type="checkbox"],
 input[type="radio"] {
     height: 1.2em;
     width: 1.2em;
+    margin-right: var(--space-2);
+    vertical-align: middle;
 }
 
 input[type="radio"] {
@@ -461,12 +473,21 @@ input {
 }
 
 label {
-    vertical-align: middle;
+    display: block;
     margin-bottom: var(--space-2);
-    display: inline-block;
     font-weight: var(--font-weight-semibold);
     font-size: var(--font-size-subhead);
     color: var(--text-main);
+}
+
+/* Inline labels for checkboxes and radios */
+input[type="checkbox"] + label,
+input[type="radio"] + label,
+label:has(+ input[type="checkbox"]),
+label:has(+ input[type="radio"]) {
+    display: inline-block;
+    margin-left: var(--space-2);
+    vertical-align: middle;
 }
 
 input:not([type="checkbox"]):not([type="radio"]),
@@ -478,19 +499,13 @@ textarea {
 }
 
 textarea {
-    display: block;
     margin-right: 0;
     box-sizing: border-box;
     resize: vertical;
 }
 
-textarea:not([cols]) {
-    width: 100%;
-}
-
 textarea:not([rows]) {
-    min-height: 40px;
-    height: 140px;
+    min-height: 140px;
 }
 
 select {
@@ -555,9 +570,10 @@ legend {
 }
 
 input[type="range"] {
-    margin: 10px 0;
-    padding: 10px 0;
+    margin: var(--space-2) 0;
+    padding: var(--space-2) 0;
     background: transparent;
+    min-height: auto;
 }
 
 input[type="range"]:focus {
