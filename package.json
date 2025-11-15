@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "A classless CSS framework inspired by Apple's design system",
   "scripts": {
-    "dev": "bun index.html"
+    "dev": "bun index.html",
+    "build": "bun run build.ts"
   },
   "keywords": [
     "css",
@@ -11,5 +12,12 @@
     "apple"
   ],
   "author": "andrew-bierman",
-  "license": "MIT"
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
 }
