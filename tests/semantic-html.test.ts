@@ -265,13 +265,16 @@ describe("Semantic HTML Styling", () => {
 				const styles = getComputedStyle(table);
 				return {
 					borderCollapse: styles.borderCollapse,
+					borderSpacing: styles.borderSpacing,
 					width: styles.width,
 					borderRadius: parseFloat(styles.borderRadius),
 				};
 			});
 
 			if (tableStyles) {
-				expect(tableStyles.borderCollapse).toBe("collapse");
+				// Changed to separate to allow border-radius to work
+				expect(tableStyles.borderCollapse).toBe("separate");
+				expect(tableStyles.borderSpacing).toBe("0px");
 				expect(tableStyles.borderRadius).toBeGreaterThanOrEqual(8);
 			}
 		});
