@@ -461,11 +461,12 @@ label:has(+ input[type="radio"]) {
 
 input:not([type="checkbox"]):not([type="radio"]),
 input[type="range"],
-select,
 button,
 textarea {
     -webkit-appearance: none;
 }
+
+/* Keep native appearance for select to preserve dropdown behavior */
 
 textarea {
     margin-right: 0;
@@ -482,21 +483,7 @@ fieldset textarea {
     min-height: 80px;
 }
 
-select {
-    background: var(--background-alt) var(--select-arrow) calc(100% - 12px)
-        50% / 12px no-repeat;
-    padding-right: 35px;
-}
-
-select::-ms-expand {
-    display: none;
-}
-
-select[multiple] {
-    padding-right: 10px;
-    background-image: none;
-    overflow-y: auto;
-}
+/* Select uses native styling for better dropdown behavior */
 
 input:focus,
 select:focus,
