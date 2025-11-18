@@ -24,7 +24,7 @@
 
 	/* Line Heights - iOS ratios */
 	--line-height-tight: 1.2;
-	--line-height-base: 1.294; /* iOS body text ratio (22/17) */
+	--line-height-base: 1.47; /* Apple HIG recommended (25/17) */
 	--line-height-relaxed: 1.5;
 
 	/* Font Weights */
