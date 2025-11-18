@@ -13,6 +13,7 @@
             href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧃</text></svg>"
         />
         <link rel="stylesheet" href="juice.css" />
+        <script type="module" src="./theme-switcher.ts"></script>
     </head>
     <body>
         <header>
@@ -27,7 +28,14 @@
                 Served via jsDelivr CDN.
             </p>
 
-            <p>
+            <p
+                style="
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    flex-wrap: wrap;
+                "
+            >
                 <strong>Theme:</strong>
                 <button onclick="setTheme('auto')" id="btn-auto">Auto</button>
                 <button onclick="setTheme('light')" id="btn-light">
@@ -292,13 +300,15 @@ console.log(greet("juice.css"));</code></pre>
                             <option value="airpods">AirPods</option>
                         </select>
 
-                        <label for="color">Favorite Color</label>
-                        <input
-                            type="color"
-                            id="color"
-                            name="color"
-                            value="#007aff"
-                        />
+                        <label for="color">
+                            Favorite Color
+                            <input
+                                type="color"
+                                id="color"
+                                name="color"
+                                value="#007aff"
+                            />
+                        </label>
                     </fieldset>
 
                     <fieldset>
@@ -533,92 +543,5 @@ console.log(greet("juice.css"));</code></pre>
                 >
             </p>
         </footer>
-
-        <script>
-            // Theme variables - copied from CSS files
-            const lightTheme = {
-                "--background-body": "#ffffff",
-                "--background": "#f5f5f7",
-                "--background-alt": "#ffffff",
-                "--selection": "rgba(0, 122, 255, 0.2)",
-                "--text-main": "#1d1d1f",
-                "--text-bright": "#000000",
-                "--text-muted": "#86868b",
-                "--links": "#007aff",
-                "--focus": "rgba(0, 122, 255, 0.4)",
-                "--border": "#d2d2d7",
-                "--code": "#ff3b30",
-                "--button-base": "#007aff",
-                "--button-hover": "#0051d5",
-                "--scrollbar-thumb": "#d2d2d7",
-                "--scrollbar-thumb-hover": "#86868b",
-                "--form-placeholder": "#86868b",
-                "--form-text": "#1d1d1f",
-                "--variable": "#34c759",
-                "--highlight": "rgba(255, 214, 10, 0.5)",
-                "--button-text": "#ffffff",
-                "--slider-thumb": "#ffffff",
-                "--success": "#34c759",
-                "--warning": "#ff9500",
-                "--error": "#ff3b30",
-            };
-            const darkTheme = {
-                "--background-body": "#000000",
-                "--background": "#1c1c1e",
-                "--background-alt": "#2c2c2e",
-                "--selection": "rgba(10, 132, 255, 0.3)",
-                "--text-main": "#f5f5f7",
-                "--text-bright": "#ffffff",
-                "--text-muted": "#8e8e93",
-                "--links": "#0a84ff",
-                "--focus": "rgba(10, 132, 255, 0.5)",
-                "--border": "#38383a",
-                "--code": "#ff453a",
-                "--button-base": "#0a84ff",
-                "--button-hover": "#409cff",
-                "--scrollbar-thumb": "#48484a",
-                "--scrollbar-thumb-hover": "#636366",
-                "--form-placeholder": "#8e8e93",
-                "--form-text": "#f5f5f7",
-                "--variable": "#30d158",
-                "--highlight": "rgba(255, 214, 10, 0.4)",
-                "--button-text": "#ffffff",
-                "--slider-thumb": "#ffffff",
-                "--success": "#30d158",
-                "--warning": "#ff9f0a",
-                "--error": "#ff453a",
-            };
-
-            function setTheme(theme) {
-                const root = document.documentElement;
-                if (theme === "auto") {
-                    Object.keys(lightTheme).forEach((key) =>
-                        root.style.removeProperty(key),
-                    );
-                    localStorage.removeItem("theme");
-                } else {
-                    const vars = theme === "light" ? lightTheme : darkTheme;
-                    Object.entries(vars).forEach(([key, value]) =>
-                        root.style.setProperty(key, value),
-                    );
-                    localStorage.setItem("theme", theme);
-                }
-                updateButtons(theme);
-            }
-
-            function updateButtons(theme) {
-                ["auto", "light", "dark"].forEach((t) => {
-                    const btn = document.getElementById("btn-" + t);
-                    if (btn) {
-                        btn.style.opacity = t === theme ? "1" : "0.6";
-                        btn.style.fontWeight = t === theme ? "600" : "normal";
-                    }
-                });
-            }
-
-            const saved = localStorage.getItem("theme");
-            if (saved) setTheme(saved);
-            else updateButtons("auto");
-        </script>
     </body>
 </html>

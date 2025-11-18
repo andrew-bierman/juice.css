@@ -1,31 +1,31 @@
 {
-  "name": "juice.css",
-  "version": "1.0.0",
-  "description": "A classless CSS framework inspired by Apple's design system",
-  "scripts": {
-    "dev": "bun src/index.html",
-    "build": "bun run build.ts",
-    "format": "biome format --write",
-    "format:files": "biome format --write",
-    "lint": "biome lint --write",
-    "lint:files": "biome lint --write",
-    "check": "biome check --write",
-    "check:files": "biome check --write"
-  },
-  "keywords": [
-    "css",
-    "classless",
-    "apple"
-  ],
-  "author": "andrew-bierman",
-  "license": "MIT",
-  "private": true,
-  "devDependencies": {
-    "@biomejs/biome": "2.3.5",
-    "@types/bun": "latest",
-    "playwright": "^1.56.1"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  }
+	"name": "juice.css",
+	"version": "1.0.0",
+	"description": "A classless CSS framework inspired by Apple's design system",
+	"scripts": {
+		"dev": "bun src/index.html",
+		"build": "bun run build.ts",
+		"format": "biome format --write",
+		"format:files": "biome format --write",
+		"lint": "biome lint --write",
+		"lint:files": "biome lint --write",
+		"check": "biome check --write",
+		"check:files": "biome check --write"
+	},
+	"keywords": [
+		"css",
+		"classless",
+		"apple"
+	],
+	"author": "andrew-bierman",
+	"license": "MIT",
+	"private": true,
+	"devDependencies": {
+		"@biomejs/biome": "2.3.5",
+		"@types/bun": "latest",
+		"playwright": "^1.56.1"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	}
 }
