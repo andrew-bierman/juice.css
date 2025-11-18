@@ -362,15 +362,14 @@ label {
 }
 
 fieldset {
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-    margin: 16px 0;
+    border: none;
+    padding: 0;
+    margin: 24px 0;
 }
 
 legend {
-    padding: 0 8px;
     font-weight: 600;
+    margin-bottom: 8px;
 }
 
 /* Checkboxes and radios */
