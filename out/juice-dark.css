@@ -366,28 +366,6 @@ input {
     vertical-align: top;
 }
 
-label {
-    display: block;
-    margin-bottom: 0;
-    font-weight: var(--font-weight-regular);
-    font-size: var(--font-size-body);
-    color: var(--text-main);
-    padding: var(--space-3) var(--space-4);
-    background: var(--background-alt);
-}
-
-/* Inline labels for checkboxes and radios */
-input[type="checkbox"] + label,
-input[type="radio"] + label,
-label:has(+ input[type="checkbox"]),
-label:has(+ input[type="radio"]) {
-    display: inline-block;
-    margin-left: var(--space-2);
-    vertical-align: middle;
-    padding: 0;
-    background: transparent;
-}
-
 input:not([type="checkbox"]):not([type="radio"]),
 input[type="range"],
 button,
@@ -447,121 +425,27 @@ textarea:disabled {
 
 fieldset {
     border: none;
-    border-radius: var(--radius-lg);
-    margin: var(--space-9) 0;
+    margin: var(--space-6) 0;
     padding: 0;
-    background: transparent;
-    overflow: visible;
-}
-
-fieldset:first-of-type {
-    margin-top: 0;
 }
 
 legend {
-    font-size: var(--font-size-footnote);
-    font-weight: var(--font-weight-regular);
-    text-transform: none;
-    color: var(--text-muted);
-    padding: 0 var(--space-4);
-    margin-bottom: var(--space-2);
-    background: transparent;
+    font-size: var(--font-size-subhead);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-main);
+    margin-bottom: var(--space-3);
+}
+
+label {
     display: block;
+    margin-bottom: var(--space-2);
 }
 
-/* Container for form rows - the actual white card */
-fieldset > *:not(legend):not(select):first-of-type {
-    border-top-left-radius: var(--radius-lg);
-    border-top-right-radius: var(--radius-lg);
-}
-
-fieldset > *:not(legend):not(select):last-child {
-    border-bottom-left-radius: var(--radius-lg);
-    border-bottom-right-radius: var(--radius-lg);
-}
-
-/* Border radius for first and last form elements in fieldsets */
-fieldset > input:last-child,
-fieldset > textarea:last-child,
-fieldset > label:nth-last-child(2) + input,
-fieldset > label:nth-last-child(2) + textarea,
-fieldset > label:has(input[type="color"]):last-child {
-    border-bottom-left-radius: var(--radius-lg);
-    border-bottom-right-radius: var(--radius-lg);
-}
-
-/* First input/textarea after legend needs top corners - higher specificity */
-fieldset
-    > legend
-    + label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
-    + input,
-fieldset
-    > legend
-    + label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
-    + textarea {
-    border-top-left-radius: var(--radius-lg);
-    border-top-right-radius: var(--radius-lg);
-}
-
-fieldset > *:not(legend):not(select) {
-    border-bottom: var(--border-thin) solid var(--border);
-}
-
-fieldset > *:not(legend):not(select):last-child {
-    border-bottom: none;
-}
-
-/* SwiftUI-style form rows with label + input combined */
-fieldset
-    label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"])) {
-    border-bottom: none;
-    padding-bottom: var(--space-1);
-    font-size: var(--font-size-footnote);
-    text-transform: none;
-    letter-spacing: var(--letter-spacing-normal);
-    color: var(--text-muted);
-    font-weight: var(--font-weight-regular);
-}
-
-/* Inputs that come after labels (but not first or last) get no border radius */
-fieldset
-    label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
-    ~ label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
-    + input:not(:last-child),
-fieldset
-    label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
-    ~ label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
-    + textarea:not(:last-child) {
-    padding-top: var(--space-1);
-    border-radius: 0;
-}
-
-/* First label after legend gets top border radius */
-fieldset legend + label {
-    border-top-left-radius: var(--radius-lg);
-    border-top-right-radius: var(--radius-lg);
-}
-
-/* Wrapper for label containing checkboxes/radios */
 label:has(input[type="checkbox"]),
 label:has(input[type="radio"]) {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    min-height: var(--tap-target-min);
-}
-
-/* Label containing color picker - SwiftUI style inline */
-fieldset label:has(input[type="color"]) {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: var(--space-3);
-    padding-bottom: var(--space-3);
-}
-
-fieldset label:has(input[type="color"]) input[type="color"] {
-    margin-left: auto;
 }
 
 input[type="range"] {
