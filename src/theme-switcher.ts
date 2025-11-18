@@ -111,16 +111,18 @@ function init(): void {
   } else {
     updateButtons("auto");
   }
-}
 
-// Make setTheme available globally for inline onclick handlers
-// TODO: Consider refactoring to use event listeners instead
-declare global {
-  interface Window {
-    setTheme: (theme: Theme) => void;
-  }
+  // Attach event listeners to theme buttons
+  document
+    .getElementById("btn-auto")
+    ?.addEventListener("click", () => setTheme("auto"));
+  document
+    .getElementById("btn-light")
+    ?.addEventListener("click", () => setTheme("light"));
+  document
+    .getElementById("btn-dark")
+    ?.addEventListener("click", () => setTheme("dark"));
 }
-window.setTheme = setTheme;
 
 // Initialize when DOM is ready
 if (document.readyState === "loading") {
