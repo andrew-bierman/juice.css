@@ -23,8 +23,14 @@ const lightVars = readFileSync("src/variables-light.css", "utf-8");
 const darkVars = readFileSync("src/variables-dark.css", "utf-8");
 const base = readFileSync("src/base.css", "utf-8");
 
+// Indent dark vars for media query
+const indentedDarkVars = darkVars
+	.split("\n")
+	.map((line) => (line ? `\t${line}` : line))
+	.join("\n");
+
 // Build juice.css (auto - switches between light/dark)
-const autoCSS = `${lightVars}\n\n@media (prefers-color-scheme: dark) {\n${darkVars}\n}\n\n${base}`;
+const autoCSS = `${lightVars}\n\n@media (prefers-color-scheme: dark) {\n${indentedDarkVars}\n}\n\n${base}`;
 
 // Build juice-light.css (always light)
 const lightCSS = `${lightVars}\n\n${base}`;
