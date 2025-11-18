@@ -1,6 +1,6 @@
-import { describe, expect, test, beforeAll } from "bun:test";
-import { existsSync, readFileSync } from "node:fs";
+import { beforeAll, describe, expect, test } from "bun:test";
 import { execSync } from "node:child_process";
+import { existsSync, readFileSync } from "node:fs";
 
 describe("Build Process", () => {
 	beforeAll(() => {
@@ -57,7 +57,11 @@ describe("Build Process", () => {
 	});
 
 	test("all CSS files should be valid (no syntax errors)", () => {
-		const files = ["out/juice.css", "out/juice-light.css", "out/juice-dark.css"];
+		const files = [
+			"out/juice.css",
+			"out/juice-light.css",
+			"out/juice-dark.css",
+		];
 
 		for (const file of files) {
 			const css = readFileSync(file, "utf-8");

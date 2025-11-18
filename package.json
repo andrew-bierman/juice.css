@@ -10,7 +10,8 @@
 		"lint": "biome lint --write",
 		"lint:files": "biome lint --write",
 		"check": "biome check --write",
-		"check:files": "biome check --write"
+		"check:files": "biome check --write",
+		"postinstall": "bun scripts/postinstall.ts"
 	},
 	"keywords": [
 		"css",

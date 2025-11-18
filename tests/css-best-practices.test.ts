@@ -1,5 +1,5 @@
-import { describe, expect, test, beforeAll, afterAll } from "bun:test";
-import { chromium, type Browser, type Page } from "playwright";
+import { afterAll, beforeAll, describe, expect, test } from "bun:test";
+import { type Browser, chromium, type Page } from "playwright";
 
 /**
  * CSS Best Practices Tests
@@ -64,7 +64,7 @@ describe("CSS Best Practices", () => {
 			});
 
 			// Each should be a valid color (hex or rgb)
-			for (const [name, value] of Object.entries(colorVars)) {
+			for (const [_name, value] of Object.entries(colorVars)) {
 				expect(
 					value.startsWith("#") ||
 						value.startsWith("rgb") ||
@@ -75,7 +75,7 @@ describe("CSS Best Practices", () => {
 
 		test("should support theme switching via CSS variables", async () => {
 			// Get initial background
-			const initialBg = await page.evaluate(() =>
+			const _initialBg = await page.evaluate(() =>
 				getComputedStyle(document.documentElement).getPropertyValue(
 					"--background-body",
 				),
@@ -104,7 +104,11 @@ describe("CSS Best Practices", () => {
 				let withClasses = 0;
 
 				for (const el of allElements) {
-					if (el.className && typeof el.className === "string" && el.className.trim()) {
+					if (
+						el.className &&
+						typeof el.className === "string" &&
+						el.className.trim()
+					) {
 						withClasses++;
 					}
 				}
@@ -251,7 +255,8 @@ describe("CSS Best Practices", () => {
 
 			if (fieldsetStyle) {
 				expect(
-					fieldsetStyle.border.includes("none") || fieldsetStyle.border === "0px",
+					fieldsetStyle.border.includes("none") ||
+						fieldsetStyle.border === "0px",
 				).toBe(true);
 				// Should still have padding for spacing
 				expect(fieldsetStyle.padding).toBeGreaterThanOrEqual(0);
@@ -286,7 +291,8 @@ describe("CSS Best Practices", () => {
 
 				return {
 					selectAppearance: select
-						? (getComputedStyle(select) as any).appearance || (getComputedStyle(select) as any).webkitAppearance
+						? (getComputedStyle(select) as any).appearance ||
+							(getComputedStyle(select) as any).webkitAppearance
 						: null,
 					inputType: input ? (input as HTMLInputElement).type : null,
 				};
@@ -307,7 +313,9 @@ describe("CSS Best Practices", () => {
 				const perfEntries = performance.getEntriesByType(
 					"resource",
 				) as PerformanceResourceTiming[];
-				const cssEntry = perfEntries.find((entry) => entry.name.includes("juice"));
+				const cssEntry = perfEntries.find((entry) =>
+					entry.name.includes("juice"),
+				);
 
 				return cssEntry ? cssEntry.duration : null;
 			});
@@ -328,7 +336,7 @@ describe("CSS Best Practices", () => {
 						if (sheet.cssRules) {
 							totalRules += sheet.cssRules.length;
 						}
-					} catch (e) {
+					} catch (_e) {
 						// CORS blocked
 					}
 				}
@@ -355,7 +363,7 @@ describe("CSS Best Practices", () => {
 				const getLuminance = (r: number, g: number, b: number) => {
 					const [rs, gs, bs] = [r, g, b].map((c) => {
 						c = c / 255;
-						return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+						return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
 					});
 					return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
 				};

@@ -1,5 +1,5 @@
-import { describe, expect, test, beforeAll, afterAll } from "bun:test";
-import { chromium, type Browser, type Page } from "playwright";
+import { afterAll, beforeAll, describe, expect, test } from "bun:test";
+import { type Browser, chromium, type Page } from "playwright";
 
 /**
  * Semantic HTML Element Tests
@@ -39,8 +39,12 @@ describe("Semantic HTML Styling", () => {
 			});
 
 			// Headings should be bold
-			expect(Number.parseInt(headingStyles.h1FontWeight || "0")).toBeGreaterThanOrEqual(600);
-			expect(Number.parseInt(headingStyles.h2FontWeight || "0")).toBeGreaterThanOrEqual(600);
+			expect(
+				Number.parseInt(headingStyles.h1FontWeight || "0", 10),
+			).toBeGreaterThanOrEqual(600);
+			expect(
+				Number.parseInt(headingStyles.h2FontWeight || "0", 10),
+			).toBeGreaterThanOrEqual(600);
 
 			// Tight line-height for headings
 			expect(headingStyles.h1LineHeight).toBeLessThanOrEqual(1.3);
@@ -85,7 +89,9 @@ describe("Semantic HTML Styling", () => {
 				return strong ? getComputedStyle(strong).fontWeight : null;
 			});
 
-			expect(Number.parseInt(strongWeight || "0")).toBeGreaterThanOrEqual(600);
+			expect(Number.parseInt(strongWeight || "0", 10)).toBeGreaterThanOrEqual(
+				600,
+			);
 		});
 
 		test("code should use monospace font", async () => {
@@ -152,7 +158,9 @@ describe("Semantic HTML Styling", () => {
 
 			expect(buttonStyles?.borderRadius).toBeGreaterThanOrEqual(8);
 			expect(buttonStyles?.cursor).toBe("pointer");
-			expect(Number.parseInt(buttonStyles?.fontWeight || "0")).toBeGreaterThanOrEqual(500);
+			expect(
+				Number.parseInt(buttonStyles?.fontWeight || "0", 10),
+			).toBeGreaterThanOrEqual(500);
 		});
 
 		test("select elements should match input styling", async () => {
@@ -171,7 +179,9 @@ describe("Semantic HTML Styling", () => {
 
 			if (selectStyles) {
 				// Should have similar border radius
-				expect(Math.abs(selectStyles.selectRadius - selectStyles.inputRadius)).toBeLessThan(2);
+				expect(
+					Math.abs(selectStyles.selectRadius - selectStyles.inputRadius),
+				).toBeLessThan(2);
 				// Should inherit font
 				expect(selectStyles.selectFont).toBe(selectStyles.inputFont);
 			}
@@ -230,7 +240,9 @@ describe("Semantic HTML Styling", () => {
 
 		test("checkboxes and radios should be inline with labels", async () => {
 			const checkboxLabel = await page.evaluate(() => {
-				const label = document.querySelector("label:has(input[type='checkbox'])");
+				const label = document.querySelector(
+					"label:has(input[type='checkbox'])",
+				);
 				if (!label) return null;
 				const styles = getComputedStyle(label);
 				return {
@@ -277,7 +289,9 @@ describe("Semantic HTML Styling", () => {
 			});
 
 			if (thStyles) {
-				expect(Number.parseInt(thStyles.fontWeight)).toBeGreaterThanOrEqual(600);
+				expect(Number.parseInt(thStyles.fontWeight, 10)).toBeGreaterThanOrEqual(
+					600,
+				);
 				expect(thStyles.backgroundColor).not.toBe("rgba(0, 0, 0, 0)");
 			}
 		});
@@ -285,15 +299,15 @@ describe("Semantic HTML Styling", () => {
 		test("table rows should have hover effect", async () => {
 			const firstRow = page.locator("tbody tr").first();
 			if ((await firstRow.count()) > 0) {
-				const normalBg = await firstRow.evaluate((el) =>
-					getComputedStyle(el).backgroundColor,
+				const _normalBg = await firstRow.evaluate(
+					(el) => getComputedStyle(el).backgroundColor,
 				);
 
 				await firstRow.hover();
 				await page.waitForTimeout(100);
 
-				const hoverBg = await firstRow.evaluate((el) =>
-					getComputedStyle(el).backgroundColor,
+				const hoverBg = await firstRow.evaluate(
+					(el) => getComputedStyle(el).backgroundColor,
 				);
 
 				// Background should change on hover (or at least be defined)
@@ -338,7 +352,9 @@ describe("Semantic HTML Styling", () => {
 
 			if (summaryStyles) {
 				expect(summaryStyles.cursor).toBe("pointer");
-				expect(Number.parseInt(summaryStyles.fontWeight)).toBeGreaterThanOrEqual(600);
+				expect(
+					Number.parseInt(summaryStyles.fontWeight, 10),
+				).toBeGreaterThanOrEqual(600);
 			}
 		});
 
