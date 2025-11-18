@@ -37,12 +37,12 @@ mkdirSync("dist", { recursive: true });
 
 // Build juice.css (auto - switches between light/dark)
 const autoCSS =
-    header +
-    lightVars +
-    "\n\n@media (prefers-color-scheme: dark) {\n" +
-    darkVars +
-    "\n}\n\n" +
-    base;
+	header +
+	lightVars +
+	"\n\n@media (prefers-color-scheme: dark) {\n" +
+	darkVars +
+	"\n}\n\n" +
+	base;
 
 // Build juice-light.css (always light)
 const lightCSS = `${header + lightVars}\n\n${base}`;
@@ -66,27 +66,25 @@ writeFileSync("dist/.temp-juice-dark.css", darkCSS);
 
 // Use Bun's bundler for minification
 const minifyCSS = async (inputPath: string, outputPath: string) => {
-    try {
-        const result = await Bun.build({
-            entrypoints: [inputPath],
-            outdir: "dist",
-            minify: true,
-            naming: "[dir]/[name].[ext]",
-        });
+	try {
+		const result = await Bun.build({
+			entrypoints: [inputPath],
+			outdir: "dist",
+			minify: true,
+			naming: "[dir]/[name].[ext]",
+		});
 
-        if (!result.success) {
-            console.warn(
-                `⚠️  Failed to minify ${inputPath}, using unminified version`,
-            );
-            return false;
-        }
-        return true;
-    } catch (error) {
-        console.warn(
-            `⚠️  Bundler not available for CSS, using unminified version`,
-        );
-        return false;
-    }
+		if (!result.success) {
+			console.warn(
+				`⚠️  Failed to minify ${inputPath}, using unminified version`,
+			);
+			return false;
+		}
+		return true;
+	} catch (error) {
+		console.warn(`⚠️  Bundler not available for CSS, using unminified version`);
+		return false;
+	}
 };
 
 // For now, write unminified to dist/ (Bun.build currently focuses on JS/TS)
@@ -97,11 +95,11 @@ writeFileSync("dist/juice-dark.css", darkCSS);
 
 // Clean up temp files
 try {
-    Bun.file("dist/.temp-juice.css").writer().unref();
-    Bun.file("dist/.temp-juice-light.css").writer().unref();
-    Bun.file("dist/.temp-juice-dark.css").writer().unref();
+	Bun.file("dist/.temp-juice.css").writer().unref();
+	Bun.file("dist/.temp-juice-light.css").writer().unref();
+	Bun.file("dist/.temp-juice-dark.css").writer().unref();
 } catch (e) {
-    // Temp files might not exist
+	// Temp files might not exist
 }
 
 // Build HTML files
@@ -110,32 +108,32 @@ writeFileSync("out/index.html", prodHTML);
 
 // For dist, use Bun to bundle HTML (will inline/optimize assets)
 await Bun.build({
-    entrypoints: ["src/index.html"],
-    outdir: "dist",
-    naming: "[dir]/[name].[ext]",
-    minify: {
-        whitespace: true,
-        identifiers: false,
-        syntax: true,
-    },
+	entrypoints: ["src/index.html"],
+	outdir: "dist",
+	naming: "[dir]/[name].[ext]",
+	minify: {
+		whitespace: true,
+		identifiers: false,
+		syntax: true,
+	},
 });
 
 // Copy theme switcher script to dist
 try {
-    const themeSwitcher = readFileSync("src/theme-switcher.ts", "utf-8");
-    writeFileSync("dist/theme-switcher.ts", themeSwitcher);
+	const themeSwitcher = readFileSync("src/theme-switcher.ts", "utf-8");
+	writeFileSync("dist/theme-switcher.ts", themeSwitcher);
 
-    // Build theme switcher with Bun bundler for dist
-    await Bun.build({
-        entrypoints: ["src/theme-switcher.ts"],
-        outdir: "dist",
-        naming: "theme-switcher.js",
-        minify: true,
-        format: "esm",
-        target: "browser",
-    });
+	// Build theme switcher with Bun bundler for dist
+	await Bun.build({
+		entrypoints: ["src/theme-switcher.ts"],
+		outdir: "dist",
+		naming: "theme-switcher.js",
+		minify: true,
+		format: "esm",
+		target: "browser",
+	});
 } catch (e) {
-    console.warn("⚠️  theme-switcher.ts not found, skipping");
+	console.warn("⚠️  theme-switcher.ts not found, skipping");
 }
 
 console.log("✅ Build complete!");
