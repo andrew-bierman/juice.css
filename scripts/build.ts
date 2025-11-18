@@ -9,8 +9,8 @@
  * - dist/ : Complete demo site (gitignored, for Cloudflare deployment)
  */
 
-import { build } from "bun";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { build } from "bun";
 
 console.log("📦 Building juice.css...");
 
@@ -44,29 +44,29 @@ writeFileSync("dist/juice-dark.css", darkCSS);
 
 // Build HTML for dist/ using Bun.build
 const distHTMLResult = await build({
-    entrypoints: ["src/index.html"],
-    outdir: "dist",
-    naming: "[dir]/[name].[ext]",
+	entrypoints: ["src/index.html"],
+	outdir: "dist",
+	naming: "[dir]/[name].[ext]",
 });
 
 if (!distHTMLResult.success) {
-    console.error("❌ Dist HTML build failed!");
-    process.exit(1);
+	console.error("❌ Dist HTML build failed!");
+	process.exit(1);
 }
 
 // Build theme switcher for dist/
 const themeSwitcherResult = await build({
-    entrypoints: ["src/theme-switcher.ts"],
-    outdir: "dist",
-    naming: "theme-switcher.js",
-    minify: true,
-    format: "esm",
-    target: "browser",
+	entrypoints: ["src/theme-switcher.ts"],
+	outdir: "dist",
+	naming: "theme-switcher.js",
+	minify: true,
+	format: "esm",
+	target: "browser",
 });
 
 if (!themeSwitcherResult.success) {
-    console.error("❌ Theme switcher build failed!");
-    process.exit(1);
+	console.error("❌ Theme switcher build failed!");
+	process.exit(1);
 }
 
 console.log("✅ Build complete!");
