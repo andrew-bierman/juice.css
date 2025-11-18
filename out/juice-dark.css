@@ -41,7 +41,8 @@
 
     /* UI Element Colors */
     --border: #38383a;
-    --code: #ff453a;
+    --code: #f5f5f7;
+    --code-bg: #1c1c1e;
     --highlight: rgba(255, 214, 10, 0.4);
 
     /* Button Colors */
@@ -101,7 +102,7 @@ body {
     padding: var(--space-6) var(--space-5);
     word-wrap: break-word;
     color: var(--text-main);
-    background: var(--background-body);
+    background: var(--background);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -204,15 +205,15 @@ address {
     font-style: normal;
 }
 
-a[href^="mailto\:"]::before {
+a[href^="mailto:"]::before {
     content: "📧 ";
 }
 
-a[href^="tel\:"]::before {
+a[href^="tel:"]::before {
     content: "📞 ";
 }
 
-a[href^="sms\:"]::before {
+a[href^="sms:"]::before {
     content: "💬 ";
 }
 
@@ -239,7 +240,9 @@ input[type="radio"] {
     cursor: pointer;
 }
 
-input:not([type="checkbox"]):not([type="radio"]),
+input:not([type="checkbox"]):not([type="radio"]):not([type="color"]):not(
+        [type="range"]
+    ),
 select,
 textarea {
     display: block;
@@ -247,7 +250,8 @@ textarea {
 }
 
 [type="checkbox"],
-[type="radio"] {
+[type="radio"],
+[type="color"] {
     display: inline-block;
     width: auto;
 }
@@ -257,14 +261,14 @@ button,
 textarea,
 select {
     color: var(--form-text);
-    background-color: var(--background);
+    background-color: var(--background-alt);
     font-family: inherit;
-    font-size: inherit;
+    font-size: var(--font-size-body);
     margin-right: 0;
-    margin-bottom: var(--space-3);
-    padding: var(--space-2) var(--space-3);
-    border: var(--border-thin) solid var(--border);
-    border-radius: var(--radius-md);
+    margin-bottom: 0;
+    padding: var(--space-1) var(--space-4) var(--space-3) var(--space-4);
+    border: none;
+    border-radius: 0;
     outline: none;
     box-sizing: border-box;
 }
@@ -279,23 +283,29 @@ select {
 
 button {
     background-color: var(--button-base);
-    padding: var(--space-2) var(--space-5);
+    padding: var(--space-3) var(--space-5);
     color: var(--button-text);
     font-weight: var(--font-weight-semibold);
     border: none;
     box-shadow: none;
     cursor: pointer;
+    border-radius: var(--radius-lg);
+    margin-top: var(--space-4);
+    margin-right: var(--space-2);
 }
 
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
     background-color: var(--button-base);
-    padding: var(--space-2) var(--space-5);
+    padding: var(--space-3) var(--space-5);
     color: var(--button-text);
     font-weight: var(--font-weight-semibold);
     border: none;
     box-shadow: none;
+    border-radius: var(--radius-lg);
+    margin-top: var(--space-4);
+    margin-right: var(--space-2);
 }
 
 button:hover,
@@ -316,10 +326,14 @@ input[type="button"]:active {
 }
 
 input[type="color"] {
-    min-height: var(--tap-target-min);
-    width: var(--tap-target-min);
-    padding: var(--space-2);
+    min-height: 32px;
+    height: 32px;
+    width: 32px;
+    padding: 0;
     cursor: pointer;
+    border: var(--border-thin) solid var(--border);
+    border-radius: var(--radius-full);
+    margin-left: auto;
 }
 
 input[type="checkbox"],
@@ -328,6 +342,8 @@ input[type="radio"] {
     width: 1.2em;
     margin-right: var(--space-2);
     vertical-align: middle;
+    border: var(--border-thin) solid var(--border);
+    background: var(--background-alt);
 }
 
 input[type="radio"] {
@@ -340,10 +356,12 @@ input {
 
 label {
     display: block;
-    margin-bottom: var(--space-2);
-    font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-subhead);
+    margin-bottom: 0;
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-body);
     color: var(--text-main);
+    padding: var(--space-3) var(--space-4);
+    background: var(--background-alt);
 }
 
 /* Inline labels for checkboxes and radios */
@@ -354,6 +372,8 @@ label:has(+ input[type="radio"]) {
     display: inline-block;
     margin-left: var(--space-2);
     vertical-align: middle;
+    padding: 0;
+    background: transparent;
 }
 
 input:not([type="checkbox"]):not([type="radio"]),
@@ -368,15 +388,20 @@ textarea {
     margin-right: 0;
     box-sizing: border-box;
     resize: vertical;
+    line-height: var(--line-height-base);
 }
 
 textarea:not([rows]) {
-    min-height: 140px;
+    min-height: 100px;
+}
+
+fieldset textarea {
+    min-height: 80px;
 }
 
 select {
-    background: var(--background) var(--select-arrow) calc(100% - 12px) 50% /
-        12px no-repeat;
+    background: var(--background-alt) var(--select-arrow) calc(100% - 12px)
+        50% / 12px no-repeat;
     padding-right: 35px;
 }
 
@@ -394,8 +419,14 @@ input:focus,
 select:focus,
 button:focus,
 textarea:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+input[type="checkbox"]:focus,
+input[type="radio"]:focus,
+input[type="color"]:focus {
     box-shadow: 0 0 0 4px var(--focus);
-    border-color: var(--links);
     outline: none;
 }
 
@@ -422,104 +453,227 @@ textarea:disabled {
 }
 
 fieldset {
-    border: var(--border-thin) var(--border) solid;
+    border: none;
     border-radius: var(--radius-lg);
-    margin: 0;
-    margin-bottom: var(--space-5);
-    padding: var(--space-4);
-    background: var(--background-alt);
+    margin: var(--space-9) 0;
+    padding: 0;
+    background: transparent;
+    overflow: visible;
+}
+
+fieldset:first-of-type {
+    margin-top: 0;
 }
 
 legend {
-    font-size: var(--font-size-subhead);
-    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-footnote);
+    font-weight: var(--font-weight-regular);
+    text-transform: none;
+    color: var(--text-muted);
+    padding: 0 var(--space-4);
+    margin-bottom: var(--space-2);
+    background: transparent;
+    display: block;
+    width: 100%;
+}
+
+/* Container for form rows - the actual white card */
+fieldset > *:not(legend):first-of-type {
+    border-top-left-radius: var(--radius-lg);
+    border-top-right-radius: var(--radius-lg);
+}
+
+fieldset > *:not(legend):last-child {
+    border-bottom-left-radius: var(--radius-lg);
+    border-bottom-right-radius: var(--radius-lg);
+}
+
+fieldset > *:not(legend) {
+    border-bottom: var(--border-thin) solid var(--border);
+}
+
+fieldset > *:not(legend):last-child {
+    border-bottom: none;
+}
+
+/* SwiftUI-style form rows with label + input combined */
+fieldset
+    label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"])) {
+    border-bottom: none;
+    padding-bottom: var(--space-1);
+    font-size: var(--font-size-footnote);
+    text-transform: none;
+    letter-spacing: var(--letter-spacing-normal);
+    color: var(--text-muted);
+    font-weight: var(--font-weight-regular);
+}
+
+fieldset
+    label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
+    + input,
+fieldset
+    label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
+    + select,
+fieldset
+    label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
+    + textarea {
+    padding-top: var(--space-1);
+    border-radius: 0;
+}
+
+/* First label after legend gets top border radius */
+fieldset legend + label {
+    border-top-left-radius: var(--radius-lg);
+    border-top-right-radius: var(--radius-lg);
+}
+
+/* Wrapper for label containing checkboxes/radios */
+label:has(input[type="checkbox"]),
+label:has(input[type="radio"]) {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--tap-target-min);
+}
+
+/* Label + color picker row styling - make them appear as one row */
+fieldset label:has(+ input[type="color"]) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-3);
+    padding-bottom: var(--space-3);
+    position: relative;
+}
+
+fieldset label:has(+ input[type="color"])::after {
+    content: "";
+    width: 32px;
+    height: 32px;
+}
+
+fieldset label:has(+ input[type="color"]) + input[type="color"] {
+    position: absolute;
+    right: var(--space-4);
+    margin-top: calc(-1 * var(--space-3) - 16px);
+    transform: translateY(-50%);
+    background: var(--background-alt);
 }
 
 input[type="range"] {
-    margin: var(--space-2) 0;
-    padding: var(--space-2) 0;
-    background: transparent;
+    margin: 0;
+    padding: var(--space-3) var(--space-4);
+    background: var(--background-alt);
     min-height: auto;
+    -webkit-appearance: none;
 }
 
 input[type="range"]:focus {
     outline: none;
+    box-shadow: none;
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
-    height: 6px;
-    transition: 0.2s;
-    background: var(--border);
-    border-radius: 3px;
+    height: 3px;
+    transition: none;
+    background: linear-gradient(
+        to right,
+        var(--links) 0%,
+        var(--links) var(--slider-value, 50%),
+        var(--border) var(--slider-value, 50%),
+        var(--border) 100%
+    );
+    border-radius: 2px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 20px;
-    width: 20px;
+    box-shadow:
+        0 0 0 0.5px rgba(0, 0, 0, 0.04),
+        0 3px 8px rgba(0, 0, 0, 0.12);
+    height: 28px;
+    width: 28px;
     border-radius: var(--radius-full);
     background: var(--slider-thumb);
     -webkit-appearance: none;
-    margin-top: -7px;
-    border: var(--border-thin) solid var(--border);
+    margin-top: -12.5px;
+    border: none;
+    cursor: pointer;
 }
 
-input[type="range"]:focus::-webkit-slider-runnable-track {
-    background: var(--links);
+input[type="range"]:active::-webkit-slider-thumb {
+    box-shadow:
+        0 0 0 0.5px rgba(0, 0, 0, 0.04),
+        0 4px 12px rgba(0, 0, 0, 0.16);
 }
 
 input[type="range"]::-moz-range-track {
     width: 100%;
-    height: 6px;
-    transition: 0.2s;
+    height: 3px;
+    transition: none;
     background: var(--border);
-    border-radius: 3px;
+    border-radius: 2px;
+}
+
+input[type="range"]::-moz-range-progress {
+    height: 3px;
+    background: var(--links);
+    border-radius: 2px;
 }
 
 input[type="range"]::-moz-range-thumb {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 20px;
-    width: 20px;
+    box-shadow:
+        0 0 0 0.5px rgba(0, 0, 0, 0.04),
+        0 3px 8px rgba(0, 0, 0, 0.12);
+    height: 28px;
+    width: 28px;
     border-radius: var(--radius-full);
     background: var(--slider-thumb);
-    border: var(--border-thin) solid var(--border);
+    border: none;
+    cursor: pointer;
+}
+
+input[type="range"]:active::-moz-range-thumb {
+    box-shadow:
+        0 0 0 0.5px rgba(0, 0, 0, 0.04),
+        0 4px 12px rgba(0, 0, 0, 0.16);
 }
 
 input[type="range"]::-ms-track {
     width: 100%;
-    height: 6px;
+    height: 3px;
     background: transparent;
     border-color: transparent;
-    border-width: 16px 0;
+    border-width: 14px 0;
     color: transparent;
 }
 
 input[type="range"]::-ms-fill-lower {
-    background: var(--border);
-    border-radius: 3px;
+    background: var(--links);
+    border-radius: 2px;
 }
 
 input[type="range"]::-ms-fill-upper {
     background: var(--border);
-    border-radius: 3px;
+    border-radius: 2px;
 }
 
 input[type="range"]::-ms-thumb {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 20px;
-    width: 20px;
+    box-shadow:
+        0 0 0 0.5px rgba(0, 0, 0, 0.04),
+        0 3px 8px rgba(0, 0, 0, 0.12);
+    height: 28px;
+    width: 28px;
     border-radius: var(--radius-full);
     background: var(--slider-thumb);
-    border: var(--border-thin) solid var(--border);
+    border: none;
+    cursor: pointer;
 }
 
-input[type="range"]:focus::-ms-fill-lower {
-    background: var(--links);
-}
-
-input[type="range"]:focus::-ms-fill-upper {
-    background: var(--links);
+input[type="range"]:active::-ms-thumb {
+    box-shadow:
+        0 0 0 0.5px rgba(0, 0, 0, 0.04),
+        0 4px 12px rgba(0, 0, 0, 0.16);
 }
 
 a {
@@ -536,7 +690,7 @@ a:hover {
 code,
 samp,
 time {
-    background: var(--background);
+    background: var(--code-bg);
     color: var(--code);
     padding: var(--space-1) var(--space-2);
     border-radius: var(--radius-sm);
@@ -544,18 +698,20 @@ time {
     font-family:
         ui-monospace, "SF Mono", Monaco, "Cascadia Mono", "Segoe UI Mono",
         "Roboto Mono", monospace;
+    font-weight: var(--font-weight-regular);
 }
 
 pre > code {
-    padding: var(--space-3);
+    padding: var(--space-4);
     display: block;
     overflow-x: auto;
     line-height: var(--line-height-relaxed);
+    background: transparent;
 }
 
 pre {
-    background: var(--background);
-    border-radius: var(--radius-md);
+    background: var(--code-bg);
+    border-radius: var(--radius-lg);
     padding: 0;
     margin: 0 0 var(--space-4);
     border: var(--border-thin) solid var(--border);

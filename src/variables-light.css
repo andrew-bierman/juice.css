@@ -46,6 +46,7 @@
     --space-5: 1.25rem; /* 20px */
     --space-6: 1.5rem; /* 24px */
     --space-8: 2rem; /* 32px */
+    --space-9: 2.1875rem; /* 35px - SwiftUI section spacing */
     --space-10: 2.5rem; /* 40px */
 
     /* Border Radius - iOS style */
@@ -95,7 +96,8 @@
 
     /* UI Element Colors */
     --border: #d2d2d7;
-    --code: #ff3b30;
+    --code: #1d1d1f;
+    --code-bg: #f5f5f7;
     --highlight: rgba(255, 214, 10, 0.5);
 
     /* Button Colors */
