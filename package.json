@@ -1,15 +1,15 @@
 {
 	"name": "juice.css",
 	"version": "1.0.0",
+	"private": true,
 	"description": "A classless CSS framework inspired by Apple's design system",
 	"keywords": [
 		"css",
 		"classless",
 		"apple"
 	],
-	"author": "andrew-bierman",
 	"license": "MIT",
-	"private": true,
+	"author": "andrew-bierman",
 	"scripts": {
 		"build": "bun run scripts/build.ts",
 		"check": "biome check --write",
@@ -17,9 +17,9 @@
 		"dev": "bun src/index.html",
 		"format": "biome format --write",
 		"format:files": "biome format --write",
+		"postinstall": "bun scripts/postinstall.ts",
 		"lint": "biome lint --write",
 		"lint:files": "biome lint --write",
-		"postinstall": "bun scripts/postinstall.ts",
 		"pre-commit": "bun scripts/pre-commit.ts"
 	},
 	"devDependencies": {

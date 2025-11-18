@@ -1,4 +1,4 @@
 pre-commit:
   commands:
     pre-commit:
-      run: bun scripts/pre-commit.ts
+      run: bun run pre-commit
