@@ -506,5 +506,100 @@ describe("Semantic HTML Styling", () => {
                 expect(scriptStyles.supPosition).toBe("relative");
             }
         });
+
+        test("cite should be styled", async () => {
+            const citeStyles = await page.evaluate(() => {
+                const cite = document.querySelector("cite");
+                if (!cite) return null;
+                const styles = getComputedStyle(cite);
+                return {
+                    fontStyle: styles.fontStyle,
+                };
+            });
+
+            if (citeStyles) {
+                expect(citeStyles.fontStyle).toBe("italic");
+            }
+        });
+
+        test("q (inline quote) should have proper quotes", async () => {
+            const qStyles = await page.evaluate(() => {
+                const q = document.querySelector("q");
+                if (!q) return null;
+                const styles = getComputedStyle(q);
+                return {
+                    quotes: styles.quotes,
+                };
+            });
+
+            if (qStyles) {
+                expect(qStyles.quotes).toBeTruthy();
+            }
+        });
+
+        test("address should be styled", async () => {
+            const addressStyles = await page.evaluate(() => {
+                const address = document.querySelector("address");
+                if (!address) return null;
+                const styles = getComputedStyle(address);
+                return {
+                    fontStyle: styles.fontStyle,
+                    margin: styles.margin,
+                };
+            });
+
+            if (addressStyles) {
+                // Should not be italic (we override default)
+                expect(addressStyles.fontStyle).toBe("normal");
+            }
+        });
+
+        test("dialog should be styled with rounded corners and shadow", async () => {
+            const dialogStyles = await page.evaluate(() => {
+                const dialog = document.querySelector("dialog");
+                if (!dialog) return null;
+                const styles = getComputedStyle(dialog);
+                return {
+                    borderRadius: parseFloat(styles.borderRadius),
+                    padding: styles.padding,
+                    boxShadow: styles.boxShadow,
+                };
+            });
+
+            if (dialogStyles) {
+                expect(dialogStyles.borderRadius).toBeGreaterThanOrEqual(8);
+                expect(dialogStyles.boxShadow).not.toBe("none");
+            }
+        });
+
+        test("dialog should be functional", async () => {
+            const openButton = page.locator("#open-dialog");
+            const dialog = page.locator("dialog");
+
+            // Dialog should not be visible initially
+            const initiallyOpen = await dialog.evaluate(
+                (el: HTMLDialogElement) => el.open,
+            );
+            expect(initiallyOpen).toBe(false);
+
+            // Click to open
+            await openButton.click();
+            await page.waitForTimeout(100);
+
+            const isOpen = await dialog.evaluate(
+                (el: HTMLDialogElement) => el.open,
+            );
+            expect(isOpen).toBe(true);
+
+            // Close it
+            const closeButton = page.locator("#close-dialog");
+            await closeButton.click();
+            await page.waitForTimeout(100);
+
+            const isClosed = await dialog.evaluate(
+                (el: HTMLDialogElement) => el.open,
+            );
+            expect(isClosed).toBe(false);
+        });
     });
 });

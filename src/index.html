@@ -15,6 +15,18 @@
         <link rel="stylesheet" href="juice-dev.css" />
         <script type="module" src="./theme-switcher.ts"></script>
         <script type="module" src="./copy-button.ts"></script>
+        <script type="module">
+            // Dialog controls
+            const dialog = document.getElementById("demo-dialog");
+            const openBtn = document.getElementById("open-dialog");
+            const closeBtn = document.getElementById("close-dialog");
+
+            openBtn?.addEventListener("click", () => dialog?.showModal());
+            closeBtn?.addEventListener("click", () => dialog?.close());
+            dialog?.addEventListener("click", (e) => {
+                if (e.target === dialog) dialog.close();
+            });
+        </script>
     </head>
     <body>
         <header>
@@ -233,6 +245,41 @@ console.log(greet("juice.css"));</code></pre>
                     <var>variable</var>,
                     <abbr title="Cascading Style Sheets">CSS</abbr>
                 </p>
+
+                <h3>Quotes</h3>
+                <p>
+                    Inline quotes:
+                    <q
+                        >Design is not just what it looks like and feels like.
+                        Design is how it works.</q
+                    >
+                    — <cite>Steve Jobs</cite>
+                </p>
+
+                <h3>Contact Information</h3>
+                <address>
+                    <strong>juice.css Project</strong><br />
+                    Email: <a href="mailto:hello@juice.css">hello@juice.css</a
+                    ><br />
+                    Phone: <a href="tel:+18005551234">1-800-555-1234</a><br />
+                    GitHub:
+                    <a href="https://github.com/andrew-bierman/juice.css"
+                        >andrew-bierman/juice.css</a
+                    >
+                </address>
+
+                <h3>Dialog Example</h3>
+                <p>
+                    <button id="open-dialog">Open Dialog</button>
+                </p>
+                <dialog id="demo-dialog">
+                    <h3>This is a Dialog</h3>
+                    <p>
+                        Native HTML dialog element with Apple-style backdrop
+                        blur and styling.
+                    </p>
+                    <button id="close-dialog">Close</button>
+                </dialog>
 
                 <h3>Contact Links</h3>
                 <p>
