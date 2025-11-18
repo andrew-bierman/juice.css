@@ -9,6 +9,7 @@
  * - dist/ : Complete demo site (gitignored, for Cloudflare deployment)
  */
 
+import { build } from "bun";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 
 console.log("📦 Building juice.css...");
@@ -42,7 +43,7 @@ writeFileSync("dist/juice-light.css", lightCSS);
 writeFileSync("dist/juice-dark.css", darkCSS);
 
 // Build HTML for dist/ using Bun.build
-const distHTMLResult = await Bun.build({
+const distHTMLResult = await build({
     entrypoints: ["src/index.html"],
     outdir: "dist",
     naming: "[dir]/[name].[ext]",
@@ -54,7 +55,7 @@ if (!distHTMLResult.success) {
 }
 
 // Build theme switcher for dist/
-const themeSwitcherResult = await Bun.build({
+const themeSwitcherResult = await build({
     entrypoints: ["src/theme-switcher.ts"],
     outdir: "dist",
     naming: "theme-switcher.js",
