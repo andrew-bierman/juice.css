@@ -230,7 +230,6 @@ a > strong {
 }
 
 button,
-select,
 input[type="submit"],
 input[type="reset"],
 input[type="button"],
@@ -243,7 +242,6 @@ input[type="radio"] {
 input:not([type="checkbox"]):not([type="radio"]):not([type="color"]):not(
         [type="range"]
     ),
-select,
 textarea {
     display: block;
     width: 100%;
@@ -258,8 +256,7 @@ textarea {
 
 input,
 button,
-textarea,
-select {
+textarea {
     color: var(--form-text);
     background-color: var(--background-alt);
     font-family: inherit;
@@ -276,8 +273,7 @@ select {
 input:not([type="checkbox"]):not([type="radio"]):not([type="color"]):not(
         [type="range"]
     ),
-button,
-select {
+button {
     min-height: var(--tap-target-min);
 }
 
@@ -399,8 +395,6 @@ textarea {
     -webkit-appearance: none;
 }
 
-/* Keep native appearance for select to preserve dropdown behavior */
-
 textarea {
     margin-right: 0;
     box-sizing: border-box;
@@ -416,10 +410,7 @@ fieldset textarea {
     min-height: 80px;
 }
 
-/* Select uses native styling for better dropdown behavior */
-
 input:focus,
-select:focus,
 button:focus,
 textarea:focus {
     box-shadow: none;
@@ -444,7 +435,6 @@ button:active {
 }
 
 input:disabled,
-select:disabled,
 button:disabled,
 textarea:disabled {
     cursor: not-allowed;
@@ -492,25 +482,19 @@ fieldset > *:not(legend):last-child {
 
 /* Border radius for first and last form elements in fieldsets */
 fieldset > input:last-child,
-fieldset > select:last-child,
 fieldset > textarea:last-child,
 fieldset > label:nth-last-child(2) + input,
-fieldset > label:nth-last-child(2) + select,
 fieldset > label:nth-last-child(2) + textarea,
 fieldset > label:has(input[type="color"]):last-child {
     border-bottom-left-radius: var(--radius-lg);
     border-bottom-right-radius: var(--radius-lg);
 }
 
-/* First input/select/textarea after legend needs top corners - higher specificity */
+/* First input/textarea after legend needs top corners - higher specificity */
 fieldset
     > legend
     + label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
     + input,
-fieldset
-    > legend
-    + label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
-    + select,
 fieldset
     > legend
     + label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
@@ -544,10 +528,6 @@ fieldset
     label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
     ~ label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
     + input:not(:last-child),
-fieldset
-    label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
-    ~ label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
-    + select:not(:last-child),
 fieldset
     label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
     ~ label:not(:has(input[type="checkbox"])):not(:has(input[type="radio"]))
