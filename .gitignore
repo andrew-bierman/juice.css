@@ -3,3 +3,6 @@ node_modules/
 *.log
 out/index.html
 tmp
+
+# Demo site build artifacts (deployed to Cloudflare)
+dist/
