@@ -470,12 +470,12 @@ legend {
 }
 
 /* Container for form rows - the actual white card */
-fieldset > *:not(legend):first-of-type {
+fieldset > *:not(legend):not(select):first-of-type {
     border-top-left-radius: var(--radius-lg);
     border-top-right-radius: var(--radius-lg);
 }
 
-fieldset > *:not(legend):last-child {
+fieldset > *:not(legend):not(select):last-child {
     border-bottom-left-radius: var(--radius-lg);
     border-bottom-right-radius: var(--radius-lg);
 }
@@ -503,11 +503,11 @@ fieldset
     border-top-right-radius: var(--radius-lg);
 }
 
-fieldset > *:not(legend) {
+fieldset > *:not(legend):not(select) {
     border-bottom: var(--border-thin) solid var(--border);
 }
 
-fieldset > *:not(legend):last-child {
+fieldset > *:not(legend):not(select):last-child {
     border-bottom: none;
 }
 
