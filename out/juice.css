@@ -131,6 +131,7 @@
 	--print-link: #0000ff;
 }
 
+
 @media (prefers-color-scheme: dark) {
 	/**
 	 * juice.css - Dark Theme Variables
@@ -197,6 +198,7 @@
 		--print-alt-bg: #f2f2f2;
 		--print-link: #0000ff;
 	}
+
 }
 
 /**
