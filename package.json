@@ -1,37 +1,37 @@
 {
-    "name": "juice.css",
-    "version": "1.0.0",
-    "description": "A classless CSS framework inspired by Apple's design system",
-    "keywords": [
-        "css",
-        "classless",
-        "apple"
-    ],
-    "license": "MIT",
-    "author": "andrew-bierman",
-    "scripts": {
-        "build": "bun run scripts/build.ts",
-        "check": "biome check --write",
-        "check:files": "biome check --write",
-        "dev": "bun src/index.html",
-        "format": "biome format --write",
-        "format:files": "biome format --write",
-        "postinstall": "bun scripts/postinstall.ts",
-        "lint": "biome lint --write",
-        "lint:files": "biome lint --write",
-        "playwright:install": "playwright install --with-deps chromium",
-        "pre-commit": "bun scripts/pre-commit.ts",
-        "test": "bun test tests/apple-design.test.ts tests/interactive-elements.test.ts tests/semantic-html.test.ts tests/css-best-practices.test.ts",
-        "test:all": "bun test"
-    },
-    "devDependencies": {
-        "@biomejs/biome": "2.3.5",
-        "@types/bun": "latest",
-        "lefthook": "^2.0.4",
-        "playwright": "^1.56.1",
-        "sort-package-json": "^3.4.0"
-    },
-    "peerDependencies": {
-        "typescript": "^5"
-    }
+	"name": "juice.css",
+	"version": "1.0.0",
+	"description": "A classless CSS framework inspired by Apple's design system",
+	"keywords": [
+		"css",
+		"classless",
+		"apple"
+	],
+	"license": "MIT",
+	"author": "andrew-bierman",
+	"scripts": {
+		"build": "bun run scripts/build.ts",
+		"check": "biome check --write",
+		"check:files": "biome check --write",
+		"dev": "bun src/index.html",
+		"format": "biome format --write",
+		"format:files": "biome format --write",
+		"postinstall": "bun scripts/postinstall.ts",
+		"lint": "biome lint --write",
+		"lint:files": "biome lint --write",
+		"playwright:install": "playwright install --with-deps chromium",
+		"pre-commit": "bun scripts/pre-commit.ts",
+		"test": "bun test tests/apple-design.test.ts tests/interactive-elements.test.ts tests/semantic-html.test.ts tests/css-best-practices.test.ts",
+		"test:all": "bun test"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.3.5",
+		"@types/bun": "latest",
+		"lefthook": "^2.0.4",
+		"playwright": "^1.56.1",
+		"sort-package-json": "^3.4.0"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	}
 }
