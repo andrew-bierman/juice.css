@@ -5,16 +5,17 @@
 
 code[class*="language-"],
 pre[class*="language-"] {
-	color: var(--text-main);
-	text-shadow: none;
-	direction: ltr;
-	text-align: left;
-	white-space: pre;
-	word-spacing: normal;
-	word-break: normal;
-	line-height: 1.5;
-	tab-size: 2;
-	hyphens: none;
+    color: var(--text-main);
+    text-shadow: none;
+    direction: ltr;
+    text-align: left;
+    white-space: pre-wrap;
+    word-spacing: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+    tab-size: 2;
+    hyphens: none;
 }
 
 /* Token colors using juice.css semantic colors */
@@ -22,16 +23,16 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: var(--text-muted);
-	font-style: italic;
+    color: var(--text-muted);
+    font-style: italic;
 }
 
 .token.punctuation {
-	color: var(--text-main);
+    color: var(--text-main);
 }
 
 .token.namespace {
-	opacity: 0.7;
+    opacity: 0.7;
 }
 
 .token.property,
@@ -41,7 +42,7 @@ pre[class*="language-"] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-	color: var(--error);
+    color: var(--error);
 }
 
 .token.selector,
@@ -50,7 +51,7 @@ pre[class*="language-"] {
 .token.char,
 .token.builtin,
 .token.inserted {
-	color: var(--success);
+    color: var(--success);
 }
 
 .token.operator,
@@ -58,35 +59,35 @@ pre[class*="language-"] {
 .token.url,
 .language-css .token.string,
 .style .token.string {
-	color: var(--warning);
+    color: var(--warning);
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-	color: var(--links);
+    color: var(--links);
 }
 
 .token.function,
 .token.class-name {
-	color: var(--links);
+    color: var(--links);
 }
 
 .token.regex,
 .token.important,
 .token.variable {
-	color: var(--variable);
+    color: var(--variable);
 }
 
 .token.important,
 .token.bold {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .token.italic {
-	font-style: italic;
+    font-style: italic;
 }
 
 .token.entity {
-	cursor: help;
+    cursor: help;
 }
