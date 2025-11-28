@@ -16,7 +16,7 @@
 - **Themeable** - Automatic dark mode support with CSS variables  
 - **Beautiful** - Apple-inspired typography, spacing, and colors
 - **Modern** - Built for modern browsers with cutting-edge CSS features
-- **Lightweight** - ~15KB for auto theme, ~13KB for single theme (unminified)
+- **Lightweight** - ~23KB for auto theme, ~14-15KB for single theme (unminified)
 - **No classes** - Just write semantic HTML, zero classes required
 
 ## Why?
@@ -132,7 +132,7 @@ Override variables at runtime without recompiling:
 Want to customize juice.css beyond CSS variables? 
 
 1. Clone this repository
-2. Edit the source files in `src/`:
+2. Edit the source files in `src/lib/`:
    - `variables-light.css` - Light theme colors
    - `variables-dark.css` - Dark theme colors
    - `base.css` - All styling (uses variables)
