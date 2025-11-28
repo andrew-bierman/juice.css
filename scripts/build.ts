@@ -13,8 +13,8 @@ import { build, file, write } from "bun";
 
 console.log("📦 Building juice.css...");
 
-// Ensure directories exist (parallel)
-await Promise.all([Bun.$`mkdir -p out`, Bun.$`mkdir -p dist`]);
+// Clean and create directories
+await Bun.$`rm -rf dist && mkdir -p out dist`;
 
 // Read source files using Bun.file (faster than fs.readFileSync)
 const [lightVars, darkVars, base] = await Promise.all([
@@ -83,30 +83,18 @@ await Promise.all([
 	write("dist/juice-dark.css", darkCSS),
 ]);
 
-// Build HTML for dist/
+// Build HTML for dist/ - Bun automatically bundles all <script> and <link> tags
 const distHTMLResult = await build({
 	entrypoints: ["src/index.html"],
 	outdir: "dist",
-	naming: "[dir]/[name].[ext]",
+	minify: true,
 });
 
 if (!distHTMLResult.success) {
-	console.error("❌ Dist HTML build failed!");
-	process.exit(1);
-}
-
-// Build theme switcher for dist/
-const themeSwitcherResult = await build({
-	entrypoints: ["src/theme-switcher.ts"],
-	outdir: "dist",
-	naming: "theme-switcher.js",
-	minify: true,
-	format: "esm",
-	target: "browser",
-});
-
-if (!themeSwitcherResult.success) {
-	console.error("❌ Theme switcher build failed!");
+	console.error("❌ Build failed!");
+	for (const log of distHTMLResult.logs) {
+		console.error(log);
+	}
 	process.exit(1);
 }
 
@@ -115,9 +103,5 @@ console.log("\n📦 Distribution files (out/) - CSS only for GitHub/CDN:");
 console.log("   • out/juice.css (auto light/dark)");
 console.log("   • out/juice-light.css");
 console.log("   • out/juice-dark.css");
-console.log("\n🌐 Demo site files (dist/) - for Cloudflare:");
-console.log("   • dist/juice.css");
-console.log("   • dist/juice-light.css");
-console.log("   • dist/juice-dark.css");
-console.log("   • dist/index.html (bundled)");
-console.log("   • dist/theme-switcher.js (minified)");
+console.log("\n🌐 Demo site files (dist/) - bundled by Bun:");
+console.log("   • dist/index.html + JS/CSS assets (auto-hashed)");

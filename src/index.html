@@ -13,20 +13,7 @@
             href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧃</text></svg>"
         />
         <link rel="stylesheet" href="juice-dev.css" />
-        <script type="module" src="./theme-switcher.ts"></script>
-        <script type="module" src="./copy-button.ts"></script>
-        <script type="module">
-            // Dialog controls
-            const dialog = document.getElementById("demo-dialog");
-            const openBtn = document.getElementById("open-dialog");
-            const closeBtn = document.getElementById("close-dialog");
-
-            openBtn?.addEventListener("click", () => dialog?.showModal());
-            closeBtn?.addEventListener("click", () => dialog?.close());
-            dialog?.addEventListener("click", (e) => {
-                if (e.target === dialog) dialog.close();
-            });
-        </script>
+        <script type="module" src="./demo.ts"></script>
     </head>
     <body>
         <header>
