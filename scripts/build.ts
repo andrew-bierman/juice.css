@@ -23,21 +23,21 @@ console.log(`📌 Version: ${version}`);
 
 // Read library source files using Bun.file (faster than fs.readFileSync)
 const [lightVars, darkVars, base] = await Promise.all([
-	file("src/lib/variables-light.css").text(),
-	file("src/lib/variables-dark.css").text(),
-	file("src/lib/base.css").text(),
+    file("src/lib/variables-light.css").text(),
+    file("src/lib/variables-dark.css").text(),
+    file("src/lib/base.css").text(),
 ]);
 
 // Indent content for nested selectors
 const indent = (content: string) =>
-	content
-		.split("\n")
-		.map((line) => (line ? `\t${line}` : line))
-		.join("\n");
+    content
+        .split("\n")
+        .map((line) => (line ? `\t${line}` : line))
+        .join("\n");
 
 // Convert :root to [data-theme="X"] selector
 const toDataTheme = (content: string, theme: "light" | "dark") =>
-	content.replace(/:root\s*\{/, `[data-theme="${theme}"] {`);
+    content.replace(/:root\s*\{/, `[data-theme="${theme}"] {`);
 
 // Generate theme-overrides.css content
 const themeOverridesCSS = `/**
@@ -76,31 +76,57 @@ const lightCSS = `${lightVars}\n\n${base}`;
 // Build juice-dark.css (always dark)
 const darkCSS = `${darkVars}\n\n${base}`;
 
+// Simple CSS minifier - removes comments, extra whitespace
+const minifyCSS = (css: string): string => {
+    return (
+        css
+            // Remove comments
+            .replace(/\/\*[\s\S]*?\*\//g, "")
+            // Remove newlines and extra spaces
+            .replace(/\s+/g, " ")
+            // Remove space around special chars
+            .replace(/\s*([{}:;,>~+])\s*/g, "$1")
+            // Remove trailing semicolons before }
+            .replace(/;}/g, "}")
+            // Remove leading/trailing whitespace
+            .trim()
+    );
+};
+
+// Minify CSS files
+const autoCSSMin = minifyCSS(autoCSS);
+const lightCSSMin = minifyCSS(lightCSS);
+const darkCSSMin = minifyCSS(darkCSS);
+
 // Write CSS files to both directories (parallel)
 await Promise.all([
-	// out/ (unminified for GitHub distribution)
-	write("out/juice.css", autoCSS),
-	write("out/juice-light.css", lightCSS),
-	write("out/juice-dark.css", darkCSS),
-	// dist/ (for Cloudflare - can be minified by Cloudflare)
-	write("dist/juice.css", autoCSS),
-	write("dist/juice-light.css", lightCSS),
-	write("dist/juice-dark.css", darkCSS),
+    // out/ - unminified
+    write("out/juice.css", autoCSS),
+    write("out/juice-light.css", lightCSS),
+    write("out/juice-dark.css", darkCSS),
+    // out/ - minified
+    write("out/juice.min.css", autoCSSMin),
+    write("out/juice-light.min.css", lightCSSMin),
+    write("out/juice-dark.min.css", darkCSSMin),
+    // dist/ (for Cloudflare)
+    write("dist/juice.css", autoCSS),
+    write("dist/juice-light.css", lightCSS),
+    write("dist/juice-dark.css", darkCSS),
 ]);
 
 // Build HTML for dist/ - Bun automatically bundles all <script> and <link> tags
 const distHTMLResult = await build({
-	entrypoints: ["src/demo/index.html"],
-	outdir: "dist",
-	minify: true,
+    entrypoints: ["src/demo/index.html"],
+    outdir: "dist",
+    minify: true,
 });
 
 if (!distHTMLResult.success) {
-	console.error("❌ Build failed!");
-	for (const log of distHTMLResult.logs) {
-		console.error(log);
-	}
-	process.exit(1);
+    console.error("❌ Build failed!");
+    for (const log of distHTMLResult.logs) {
+        console.error(log);
+    }
+    process.exit(1);
 }
 
 // Inject version into dist/index.html (replace {{VERSION}} placeholders)
@@ -113,5 +139,8 @@ console.log("\n📦 Distribution files (out/) - CSS only for GitHub/CDN:");
 console.log("   • out/juice.css (auto light/dark)");
 console.log("   • out/juice-light.css");
 console.log("   • out/juice-dark.css");
+console.log("   • out/juice.min.css (minified)");
+console.log("   • out/juice-light.min.css (minified)");
+console.log("   • out/juice-dark.min.css (minified)");
 console.log("\n🌐 Demo site files (dist/) - bundled by Bun:");
 console.log("   • dist/index.html + JS/CSS assets (auto-hashed)");
