@@ -487,6 +487,15 @@ table {
         display: table;
         width: 100%;
     }
+
+    /* Remove double border-radius on mobile */
+    thead tr:first-child th:first-child {
+        border-top-left-radius: 0;
+    }
+
+    thead tr:first-child th:last-child {
+        border-top-right-radius: 0;
+    }
 }
 
 th,

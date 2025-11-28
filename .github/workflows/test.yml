@@ -31,8 +31,11 @@ jobs:
             - name: Run build
               run: bun run build
 
-            - name: Run tests
-              run: bun run test
+            - name: Start dev server and run tests
+              run: |
+                  bun src/demo/index.html --port 3000 &
+                  sleep 3
+                  bun run test
 
             - name: Upload test results
               if: always()
