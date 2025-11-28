@@ -14,63 +14,53 @@ type Theme = "auto" | "light" | "dark";
  * CSS handles the actual variable values via [data-theme] selectors
  */
 function setTheme(theme: Theme): void {
-	const root = document.documentElement;
+    const root = document.documentElement;
 
-	if (theme === "auto") {
-		// Remove override, let CSS prefers-color-scheme handle it
-		root.removeAttribute("data-theme");
-		localStorage.removeItem("theme");
-	} else {
-		// Set explicit theme
-		root.setAttribute("data-theme", theme);
-		localStorage.setItem("theme", theme);
-	}
+    if (theme === "auto") {
+        // Remove override, let CSS prefers-color-scheme handle it
+        root.removeAttribute("data-theme");
+        localStorage.removeItem("theme");
+    } else {
+        // Set explicit theme
+        root.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
+    }
 
-	updateButtons(theme);
+    updateSelect(theme);
 }
 
 /**
- * Update button visual states to show active theme
+ * Update select element to show active theme
  */
-function updateButtons(theme: Theme): void {
-	const themes: Theme[] = ["auto", "light", "dark"];
-
-	for (const t of themes) {
-		const btn = document.getElementById(`btn-${t}`);
-		if (btn) {
-			btn.style.opacity = t === theme ? "1" : "0.6";
-			btn.style.fontWeight = t === theme ? "600" : "normal";
-		}
-	}
+function updateSelect(theme: Theme): void {
+    const select = document.getElementById("theme-select") as HTMLSelectElement;
+    if (select) {
+        select.value = theme;
+    }
 }
 
 /**
  * Initialize theme switcher on page load
  */
 function init(): void {
-	const saved = localStorage.getItem("theme") as Theme | null;
+    const saved = localStorage.getItem("theme") as Theme | null;
 
-	if (saved && ["auto", "light", "dark"].includes(saved)) {
-		setTheme(saved);
-	} else {
-		updateButtons("auto");
-	}
+    if (saved && ["auto", "light", "dark"].includes(saved)) {
+        setTheme(saved);
+    } else {
+        updateSelect("auto");
+    }
 
-	// Attach event listeners to theme buttons
-	document
-		.getElementById("btn-auto")
-		?.addEventListener("click", () => setTheme("auto"));
-	document
-		.getElementById("btn-light")
-		?.addEventListener("click", () => setTheme("light"));
-	document
-		.getElementById("btn-dark")
-		?.addEventListener("click", () => setTheme("dark"));
+    // Attach event listener to theme select
+    const select = document.getElementById("theme-select") as HTMLSelectElement;
+    select?.addEventListener("change", (e) => {
+        setTheme((e.target as HTMLSelectElement).value as Theme);
+    });
 }
 
 // Initialize when DOM is ready
 if (document.readyState === "loading") {
-	document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener("DOMContentLoaded", init);
 } else {
-	init();
+    init();
 }

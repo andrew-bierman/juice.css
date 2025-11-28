@@ -18,7 +18,7 @@
     <body>
         <header>
             <h1>
-                juice.css
+                🧃 juice.css
                 <small
                     style="font-size: 0.4em; font-weight: normal; opacity: 0.7"
                     >v{{VERSION}}</small
@@ -29,7 +29,7 @@
                 <strong>beautiful</strong>. No classes. No JavaScript. Just semantic HTML.
             </p>
             <p>
-                🧃 Inspired by Apple's design system and
+                Inspired by Apple's design system and
                 <a href="https://github.com/kognise/water.css">water.css</a>.
                 Served via jsDelivr CDN.
             </p>
@@ -51,11 +51,12 @@
                     flex-wrap: wrap;
                 "
             >
-                <strong>Theme:</strong>
-                <button id="btn-auto">Auto</button>
-                <button id="btn-light">Light</button>
-                <button id="btn-dark">Dark</button>
-                <span style="margin-left: 16px"></span>
+                <label for="theme-select"><strong>Theme:</strong></label>
+                <select id="theme-select">
+                    <option value="auto">Auto</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
                 <button id="toggle-raw">Raw HTML</button>
             </p>
         </header>
@@ -327,13 +328,6 @@ console.log(greet("juice.css"));</code></pre>
                     <button id="close-dialog">Close</button>
                 </dialog>
 
-                <h3>Contact Links</h3>
-                <p>
-                    Email: <a href="mailto:hello@juice.css">hello@juice.css</a
-                    ><br />
-                    Phone: <a href="tel:+18005551234">1-800-555-1234</a><br />
-                    SMS: <a href="sms:+18005551234">Text us</a>
-                </p>
             </section>
 
             <section id="forms">
@@ -560,6 +554,18 @@ console.log(greet("juice.css"));</code></pre>
                     />
                     <figcaption>
                         Images are responsive and include rounded corners
+                    </figcaption>
+                </figure>
+
+                <h3>Video</h3>
+                <figure>
+                    <video controls>
+                        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm" />
+                        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                    <figcaption>
+                        Videos are also responsive with rounded corners
                     </figcaption>
                 </figure>
             </section>
