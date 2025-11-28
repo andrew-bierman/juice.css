@@ -26,13 +26,22 @@
             </h1>
             <p>
                 A drop-in collection of CSS styles to make simple websites look
-                <strong>beautiful</strong>.
+                <strong>beautiful</strong>. No classes. No JavaScript. Just semantic HTML.
             </p>
             <p>
                 🧃 Inspired by Apple's design system and
                 <a href="https://github.com/kognise/water.css">water.css</a>.
                 Served via jsDelivr CDN.
             </p>
+
+            <nav>
+                <a href="#getting-started">Get Started</a> ·
+                <a href="#typography">Typography</a> ·
+                <a href="#forms">Forms</a> ·
+                <a href="#tables">Tables</a> ·
+                <a href="#media">Media</a> ·
+                <a href="#theming">Theming</a>
+            </nav>
 
             <p
                 style="
@@ -52,65 +61,100 @@
         </header>
 
         <main>
-            <section>
-                <h2>Goals</h2>
-                <ul>
-                    <li>
-                        <strong>Responsive</strong> - Looks great on all screen
-                        sizes
-                    </li>
-                    <li>
-                        <strong>Themeable</strong> - Automatic dark mode support
-                        via CSS variables
-                    </li>
-                    <li>
-                        <strong>Beautiful</strong> - Apple-inspired typography
-                        and spacing
-                    </li>
-                    <li><strong>Modern</strong> - Built for modern browsers</li>
-                    <li>
-                        <strong>Lightweight</strong> - ~16KB minified for auto
-                        theme, ~11-12KB for single theme
-                    </li>
-                    <li>
-                        <strong>No classes</strong> - Just write semantic HTML
-                    </li>
-                </ul>
+            <section id="getting-started">
+                <h2>Quick Start</h2>
+                <p>Add <strong>one line</strong> to your HTML and you're done:</p>
+                <pre><code class="language-html">&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@{{VERSION}}/out/juice.min.css"&gt;</code></pre>
+                <p>That's it. Your semantic HTML now looks like this page.</p>
+
+                <details>
+                    <summary>See the full starter template</summary>
+                    <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My Page&lt;/title&gt;
+    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@{{VERSION}}/out/juice.min.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Welcome&lt;/h1&gt;
+        &lt;p&gt;Your content here.&lt;/p&gt;
+    &lt;/header&gt;
+    &lt;main&gt;
+        &lt;section&gt;
+            &lt;h2&gt;Section Title&lt;/h2&gt;
+            &lt;p&gt;Just write semantic HTML. No classes needed.&lt;/p&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;
+        &lt;p&gt;Made with juice.css&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </details>
             </section>
 
             <section>
-                <h2>Why?</h2>
-                <p>
-                    I commonly make quick demo pages or websites with simple
-                    content. For these, I don't want to spend time styling them,
-                    but don't like the look of unstyled HTML. juice.css gives
-                    you beautiful, Apple-inspired styling with zero effort.
-                </p>
+                <h2>Features</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Zero Config</strong></td>
+                            <td>Drop in a single CSS file - no build step, no classes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dark Mode</strong></td>
+                            <td>Automatic theme switching via <code>prefers-color-scheme</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Responsive</strong></td>
+                            <td>Optimized for mobile, tablet, and desktop</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lightweight</strong></td>
+                            <td>~16KB minified (auto theme), ~11KB (single theme)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Accessible</strong></td>
+                            <td>Semantic HTML with proper focus states and contrast</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Customizable</strong></td>
+                            <td>Override CSS variables for instant theming</td>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
 
             <section>
-                <h2>Who?</h2>
-                <p>
-                    You might want to use juice.css if you're making a simple
-                    static page or demo website and want it to look clean and
-                    modern without writing any CSS. It's perfect for:
-                </p>
-                <ul>
-                    <li>Documentation sites</li>
-                    <li>Prototypes and demos</li>
-                    <li>Simple landing pages</li>
-                    <li>Internal tools</li>
-                    <li>README previews</li>
-                </ul>
-                <p>
-                    juice.css is a great starting point for a custom theme, but
-                    is also fine to use on its own for an simple, Apple-like
-                    aesthetic.
-                </p>
+                <h2>Perfect For</h2>
+                <dl>
+                    <dt>Documentation</dt>
+                    <dd>Write docs in plain HTML or Markdown-to-HTML and get beautiful output</dd>
+
+                    <dt>Prototypes</dt>
+                    <dd>Spin up demos and MVPs without wrestling with CSS</dd>
+
+                    <dt>Internal Tools</dt>
+                    <dd>Make admin panels and dashboards look polished instantly</dd>
+
+                    <dt>Learning</dt>
+                    <dd>Focus on HTML semantics without worrying about styling</dd>
+                </dl>
             </section>
 
+            <hr />
+
             <section>
-                <h2>How?</h2>
+                <h2>Installation Options</h2>
                 <p>Just add this to your <code>&lt;head&gt;</code>:</p>
 
                 <h3>Automatic Theme (Recommended)</h3>
@@ -134,7 +178,7 @@
                 </p>
             </section>
 
-            <section>
+            <section id="theming">
                 <h2>Theming</h2>
                 <p>
                     juice.css uses CSS variables for theming. You can customize
@@ -619,25 +663,21 @@ console.log(greet("juice.css"));</code></pre>
         </main>
 
         <footer>
+            <hr />
             <p>
-                &copy; 2024 juice.css by
+                <strong>juice.css</strong> by
                 <a href="https://github.com/andrew-bierman">andrew-bierman</a>
             </p>
             <p>
-                <small
-                    >Inspired by Apple's design system. Forked from
-                    <a href="https://github.com/kognise/water.css">water.css</a
-                    >. Served via Cloudflare for blazing-fast
-                    performance.</small
-                >
+                <a href="https://github.com/andrew-bierman/juice.css">GitHub</a> ·
+                <a href="https://github.com/andrew-bierman/juice.css/issues">Issues</a> ·
+                <a href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@{{VERSION}}/out/juice.min.css">CDN</a>
             </p>
             <p>
-                <small
-                    >View source on
-                    <a href="https://github.com/andrew-bierman/juice.css"
-                        >GitHub</a
-                    ></small
-                >
+                <small>
+                    Inspired by Apple's design system.
+                    Forked from <a href="https://github.com/kognise/water.css">water.css</a>.
+                </small>
             </p>
         </footer>
     </body>
