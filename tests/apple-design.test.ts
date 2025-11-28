@@ -126,8 +126,10 @@ describe("Apple Design System Compliance", () => {
 
 		// Each heading should be smaller than the previous
 		for (let i = 1; i < headingSizes.length; i++) {
-			if (headingSizes[i] > 0) {
-				expect(headingSizes[i]).toBeLessThanOrEqual(headingSizes[i - 1]);
+			const current = headingSizes[i];
+			const previous = headingSizes[i - 1];
+			if (current !== undefined && current > 0 && previous !== undefined) {
+				expect(current).toBeLessThanOrEqual(previous);
 			}
 		}
 	});

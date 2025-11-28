@@ -6,7 +6,7 @@ function addCopyButtons() {
 	// Find all <pre><code> blocks
 	const codeBlocks = document.querySelectorAll("pre > code");
 
-	for (const codeBlock of codeBlocks) {
+	for (const codeBlock of Array.from(codeBlocks)) {
 		const pre = codeBlock.parentElement;
 		if (!pre) continue;
 

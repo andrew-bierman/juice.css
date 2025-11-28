@@ -356,7 +356,9 @@ describe("Interactive Elements - Functionality & Rendering", () => {
 
 			expect(colorStyle?.borderRadius).toContain("9999px");
 			// Should be roughly square/circular
-			expect(Math.abs(colorStyle?.width - colorStyle?.height)).toBeLessThan(5);
+			const width = colorStyle?.width ?? 0;
+			const height = colorStyle?.height ?? 0;
+			expect(Math.abs(width - height)).toBeLessThan(5);
 		});
 
 		test("color input should have pointer cursor", async () => {
@@ -417,18 +419,22 @@ describe("Interactive Elements - Functionality & Rendering", () => {
 				.all();
 
 			if (radios.length > 1) {
-				await radios[0].click();
-				await page.waitForTimeout(100);
-				const first = await radios[0].isChecked();
+				const radio0 = radios[0];
+				const radio1 = radios[1];
+				if (radio0 && radio1) {
+					await radio0.click();
+					await page.waitForTimeout(100);
+					const first = await radio0.isChecked();
 
-				await radios[1].click();
-				await page.waitForTimeout(100);
-				const firstAfter = await radios[0].isChecked();
-				const second = await radios[1].isChecked();
+					await radio1.click();
+					await page.waitForTimeout(100);
+					const firstAfter = await radio0.isChecked();
+					const second = await radio1.isChecked();
 
-				expect(first).toBe(true);
-				expect(second).toBe(true);
-				expect(firstAfter).toBe(false); // First should be unchecked
+					expect(first).toBe(true);
+					expect(second).toBe(true);
+					expect(firstAfter).toBe(false); // First should be unchecked
+				}
 			}
 		});
 	});

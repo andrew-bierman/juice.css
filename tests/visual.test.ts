@@ -87,10 +87,11 @@ describe("Visual Regression Tests", () => {
 			.first()
 			.evaluate((el) => {
 				const styles = window.getComputedStyle(el);
+				const htmlEl = el as HTMLElement;
 				return {
 					borderRadius: styles.borderRadius,
-					width: el.offsetWidth,
-					height: el.offsetHeight,
+					width: htmlEl.offsetWidth,
+					height: htmlEl.offsetHeight,
 				};
 			});
 

@@ -10,9 +10,10 @@
 	"license": "MIT",
 	"author": "andrew-bierman",
 	"scripts": {
+		"biome:check": "biome check --write",
 		"build": "bun run scripts/build.ts",
-		"check": "biome check --write",
-		"check:files": "biome check --write",
+		"check": "bun biome:check && bun check:types",
+		"check:types": "tsc --noEmit",
 		"dev": "bun src/index.html",
 		"format": "biome format --write",
 		"format:files": "biome format --write",

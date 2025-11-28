@@ -105,7 +105,7 @@ describe("CSS Best Practices", () => {
 				const allElements = document.querySelectorAll("*");
 				let withClasses = 0;
 
-				for (const el of allElements) {
+				for (const el of Array.from(allElements)) {
 					if (
 						el.className &&
 						typeof el.className === "string" &&
@@ -370,15 +370,15 @@ describe("CSS Best Practices", () => {
 					const [rs, gs, bs] = [r, g, b].map((c) => {
 						c = c / 255;
 						return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
-					});
+					}) as [number, number, number];
 					return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
 				};
 
 				const bg = rgb(styles.backgroundColor);
 				const fg = rgb(styles.color);
 
-				const l1 = getLuminance(bg[0], bg[1], bg[2]);
-				const l2 = getLuminance(fg[0], fg[1], fg[2]);
+				const l1 = getLuminance(bg[0] ?? 0, bg[1] ?? 0, bg[2] ?? 0);
+				const l2 = getLuminance(fg[0] ?? 0, fg[1] ?? 0, fg[2] ?? 0);
 
 				const ratio =
 					l1 > l2 ? (l1 + 0.05) / (l2 + 0.05) : (l2 + 0.05) / (l1 + 0.05);
@@ -414,7 +414,7 @@ describe("CSS Best Practices", () => {
 				const allElements = document.querySelectorAll("*");
 				let countWithOutlineNone = 0;
 
-				for (const el of allElements) {
+				for (const el of Array.from(allElements)) {
 					const styles = getComputedStyle(el);
 					if (styles.outline === "none") {
 						countWithOutlineNone++;
