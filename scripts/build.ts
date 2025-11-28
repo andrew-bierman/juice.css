@@ -2,26 +2,29 @@
 
 /**
  * juice.css Build Script
- * Leverages Bun's bundler for optimization
+ * Leverages Bun's native APIs for optimal performance
  *
  * Generates two output directories:
  * - out/  : CSS distribution files only (committed to GitHub for CDN/direct usage)
  * - dist/ : Complete demo site (gitignored, for Cloudflare deployment)
  */
 
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { build } from "bun";
+import { mkdir } from "node:fs/promises";
 
 console.log("📦 Building juice.css...");
 
-// Ensure directories exist
-mkdirSync("out", { recursive: true });
-mkdirSync("dist", { recursive: true });
+// Ensure directories exist (parallel)
+await Promise.all([
+	mkdir("out", { recursive: true }),
+	mkdir("dist", { recursive: true }),
+]);
 
-// Read source files
-const lightVars = readFileSync("src/variables-light.css", "utf-8");
-const darkVars = readFileSync("src/variables-dark.css", "utf-8");
-const base = readFileSync("src/base.css", "utf-8");
+// Read source files using Bun.file (faster than fs.readFileSync)
+const [lightVars, darkVars, base] = await Promise.all([
+	Bun.file("src/variables-light.css").text(),
+	Bun.file("src/variables-dark.css").text(),
+	Bun.file("src/base.css").text(),
+]);
 
 // Indent dark vars for media query
 const indentedDarkVars = darkVars
@@ -38,18 +41,20 @@ const lightCSS = `${lightVars}\n\n${base}`;
 // Build juice-dark.css (always dark)
 const darkCSS = `${darkVars}\n\n${base}`;
 
-// Write to out/ (unminified for GitHub distribution)
-writeFileSync("out/juice.css", autoCSS);
-writeFileSync("out/juice-light.css", lightCSS);
-writeFileSync("out/juice-dark.css", darkCSS);
-
-// Write to dist/ (for Cloudflare - can be minified by Cloudflare)
-writeFileSync("dist/juice.css", autoCSS);
-writeFileSync("dist/juice-light.css", lightCSS);
-writeFileSync("dist/juice-dark.css", darkCSS);
+// Write CSS files to both directories (parallel using Bun.write)
+await Promise.all([
+	// out/ (unminified for GitHub distribution)
+	Bun.write("out/juice.css", autoCSS),
+	Bun.write("out/juice-light.css", lightCSS),
+	Bun.write("out/juice-dark.css", darkCSS),
+	// dist/ (for Cloudflare - can be minified by Cloudflare)
+	Bun.write("dist/juice.css", autoCSS),
+	Bun.write("dist/juice-light.css", lightCSS),
+	Bun.write("dist/juice-dark.css", darkCSS),
+]);
 
 // Build HTML for dist/ using Bun.build
-const distHTMLResult = await build({
+const distHTMLResult = await Bun.build({
 	entrypoints: ["src/index.html"],
 	outdir: "dist",
 	naming: "[dir]/[name].[ext]",
@@ -61,7 +66,7 @@ if (!distHTMLResult.success) {
 }
 
 // Build theme switcher for dist/
-const themeSwitcherResult = await build({
+const themeSwitcherResult = await Bun.build({
 	entrypoints: ["src/theme-switcher.ts"],
 	outdir: "dist",
 	naming: "theme-switcher.js",
