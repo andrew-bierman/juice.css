@@ -89,12 +89,12 @@ describe("CSS Best Practices", () => {
 				await darkButton.click();
 				await page.waitForTimeout(200);
 
-				const darkBg = await page.evaluate(() =>
-					document.documentElement.style.getPropertyValue("--background-body"),
+				const themeAttr = await page.evaluate(() =>
+					document.documentElement.getAttribute("data-theme"),
 				);
 
-				// Should have changed
-				expect(darkBg).toBeTruthy();
+				// Should have data-theme attribute set
+				expect(themeAttr).toBe("dark");
 			}
 		});
 	});
@@ -111,6 +111,14 @@ describe("CSS Best Practices", () => {
 						typeof el.className === "string" &&
 						el.className.trim()
 					) {
+						// Exclude Prism syntax highlighting classes (demo feature, not framework)
+						const classes = el.className.trim();
+						if (
+							classes.startsWith("token") ||
+							classes.startsWith("language-")
+						) {
+							continue;
+						}
 						withClasses++;
 					}
 				}
@@ -123,7 +131,8 @@ describe("CSS Best Practices", () => {
 			});
 
 			// Most elements should not have classes (classless framework)
-			expect(classUsage.percentage).toBeLessThan(20);
+			// Demo site has some classes for theme switcher buttons etc.
+			expect(classUsage.percentage).toBeLessThan(10);
 		});
 
 		test("should style semantic HTML without classes", async () => {
