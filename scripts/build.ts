@@ -9,21 +9,18 @@
  * - dist/ : Complete demo site (gitignored, for Cloudflare deployment)
  */
 
-import { mkdir } from "node:fs/promises";
+import { build, file, write } from "bun";
 
 console.log("📦 Building juice.css...");
 
 // Ensure directories exist (parallel)
-await Promise.all([
-	mkdir("out", { recursive: true }),
-	mkdir("dist", { recursive: true }),
-]);
+await Promise.all([Bun.$`mkdir -p out`, Bun.$`mkdir -p dist`]);
 
 // Read source files using Bun.file (faster than fs.readFileSync)
 const [lightVars, darkVars, base] = await Promise.all([
-	Bun.file("src/variables-light.css").text(),
-	Bun.file("src/variables-dark.css").text(),
-	Bun.file("src/base.css").text(),
+	file("src/variables-light.css").text(),
+	file("src/variables-dark.css").text(),
+	file("src/base.css").text(),
 ]);
 
 // Indent content for nested selectors
@@ -52,7 +49,7 @@ ${toDataTheme(darkVars, "dark")}
 `;
 
 // Write theme-overrides.css to src/ for dev mode
-await Bun.write("src/theme-overrides.css", themeOverridesCSS);
+await write("src/theme-overrides.css", themeOverridesCSS);
 
 // Build juice.css (auto - switches between light/dark, with data-theme overrides)
 const autoCSS = `${lightVars}
@@ -74,20 +71,20 @@ const lightCSS = `${lightVars}\n\n${base}`;
 // Build juice-dark.css (always dark)
 const darkCSS = `${darkVars}\n\n${base}`;
 
-// Write CSS files to both directories (parallel using Bun.write)
+// Write CSS files to both directories (parallel)
 await Promise.all([
 	// out/ (unminified for GitHub distribution)
-	Bun.write("out/juice.css", autoCSS),
-	Bun.write("out/juice-light.css", lightCSS),
-	Bun.write("out/juice-dark.css", darkCSS),
+	write("out/juice.css", autoCSS),
+	write("out/juice-light.css", lightCSS),
+	write("out/juice-dark.css", darkCSS),
 	// dist/ (for Cloudflare - can be minified by Cloudflare)
-	Bun.write("dist/juice.css", autoCSS),
-	Bun.write("dist/juice-light.css", lightCSS),
-	Bun.write("dist/juice-dark.css", darkCSS),
+	write("dist/juice.css", autoCSS),
+	write("dist/juice-light.css", lightCSS),
+	write("dist/juice-dark.css", darkCSS),
 ]);
 
-// Build HTML for dist/ using Bun.build
-const distHTMLResult = await Bun.build({
+// Build HTML for dist/
+const distHTMLResult = await build({
 	entrypoints: ["src/index.html"],
 	outdir: "dist",
 	naming: "[dir]/[name].[ext]",
@@ -99,7 +96,7 @@ if (!distHTMLResult.success) {
 }
 
 // Build theme switcher for dist/
-const themeSwitcherResult = await Bun.build({
+const themeSwitcherResult = await build({
 	entrypoints: ["src/theme-switcher.ts"],
 	outdir: "dist",
 	naming: "theme-switcher.js",
