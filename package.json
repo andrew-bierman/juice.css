@@ -14,7 +14,7 @@
 		"build": "bun run scripts/build.ts",
 		"check": "bun biome:check && bun check:types",
 		"check:types": "tsc --noEmit",
-		"dev": "bun src/index.html",
+		"dev": "bun src/demo/index.html",
 		"format": "biome format --write",
 		"format:files": "biome format --write",
 		"postinstall": "bun scripts/postinstall.ts",

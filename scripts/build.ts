@@ -21,11 +21,11 @@ const pkg = await file("package.json").json();
 const version = pkg.version;
 console.log(`📌 Version: ${version}`);
 
-// Read source files using Bun.file (faster than fs.readFileSync)
+// Read library source files using Bun.file (faster than fs.readFileSync)
 const [lightVars, darkVars, base] = await Promise.all([
-	file("src/variables-light.css").text(),
-	file("src/variables-dark.css").text(),
-	file("src/base.css").text(),
+	file("src/lib/variables-light.css").text(),
+	file("src/lib/variables-dark.css").text(),
+	file("src/lib/base.css").text(),
 ]);
 
 // Indent content for nested selectors
@@ -53,8 +53,8 @@ ${toDataTheme(lightVars, "light")}
 ${toDataTheme(darkVars, "dark")}
 `;
 
-// Write theme-overrides.css to src/ for dev mode
-await write("src/theme-overrides.css", themeOverridesCSS);
+// Write theme-overrides.css to src/demo/ for dev mode
+await write("src/demo/theme-overrides.css", themeOverridesCSS);
 
 // Build juice.css (auto - switches between light/dark, with data-theme overrides)
 const autoCSS = `${lightVars}
@@ -90,7 +90,7 @@ await Promise.all([
 
 // Build HTML for dist/ - Bun automatically bundles all <script> and <link> tags
 const distHTMLResult = await build({
-	entrypoints: ["src/index.html"],
+	entrypoints: ["src/demo/index.html"],
 	outdir: "dist",
 	minify: true,
 });
