@@ -16,7 +16,7 @@
 - **Themeable** - Automatic dark mode support with CSS variables  
 - **Beautiful** - Apple-inspired typography, spacing, and colors
 - **Modern** - Built for modern browsers with cutting-edge CSS features
-- **Lightweight** - ~23KB for auto theme, ~14-15KB for single theme (unminified)
+- **Lightweight** - ~16KB minified for auto theme, ~11-12KB for single theme
 - **No classes** - Just write semantic HTML, zero classes required
 
 ## Why?
@@ -44,20 +44,22 @@ Just add this to your `<head>`:
 Automatically switches between light and dark based on system preference:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.0.1/out/juice.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.0.1/out/juice.min.css">
 ```
 
 ### Always Light
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.0.1/out/juice-light.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.0.1/out/juice-light.min.css">
 ```
 
 ### Always Dark
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.0.1/out/juice-dark.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.0.1/out/juice-dark.min.css">
 ```
+
+> **Tip:** Use `.min.css` for production (smaller files). Unminified versions are also available without `.min` for debugging.
 
 > **Note:** Always pin to a specific version (e.g., `@0.0.1`) in production. Using `@latest` is convenient for development but can cause unexpected changes when the library updates.
 
