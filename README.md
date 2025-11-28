@@ -1,71 +1,86 @@
-# juice.css
+<p align="center">
+  <img src="https://em-content.zobj.net/source/apple/391/beverage-box_1f9c3.png" width="120" alt="juice.css logo">
+</p>
+
+<h1 align="center">juice.css</h1>
 
 <p align="center">
-  <strong>A drop-in collection of CSS styles to make simple websites look beautiful.</strong>
+  <strong>Drop-in CSS to make simple websites look beautiful.</strong><br>
+  Apple-inspired styling for semantic HTML. No classes required.
 </p>
 
 <p align="center">
-  🧃 Inspired by Apple's design system. Served via jsDelivr CDN.
+  <a href="https://github.com/andrew-bierman/juice.css/releases"><img src="https://img.shields.io/github/v/release/andrew-bierman/juice.css?style=flat-square" alt="Release"></a>
+  <a href="https://github.com/andrew-bierman/juice.css/blob/main/LICENSE"><img src="https://img.shields.io/github/license/andrew-bierman/juice.css?style=flat-square" alt="License"></a>
+  <a href="https://www.jsdelivr.com/package/gh/andrew-bierman/juice.css"><img src="https://img.shields.io/jsdelivr/gh/hm/andrew-bierman/juice.css?style=flat-square" alt="jsDelivr hits"></a>
+  <img src="https://img.shields.io/badge/dependencies-0-brightgreen?style=flat-square" alt="Zero dependencies">
+</p>
+
+<p align="center">
+  <a href="https://andrew-bierman.github.io/juice.css">Live Demo</a> ·
+  <a href="#quick-start">Quick Start</a> ·
+  <a href="#theming">Theming</a> ·
+  <a href="#browser-support">Browser Support</a>
 </p>
 
 ---
 
-## Goals
+## Features
 
-- **Responsive** - Looks great on all screen sizes from mobile to desktop
-- **Themeable** - Automatic dark mode support with CSS variables  
-- **Beautiful** - Apple-inspired typography, spacing, and colors
-- **Modern** - Built for modern browsers with cutting-edge CSS features
-- **Lightweight** - ~16KB minified for auto theme, ~11-12KB for single theme
-- **No classes** - Just write semantic HTML, zero classes required
+| Feature | Description |
+|---------|-------------|
+| **Classless** | Just write semantic HTML - no classes needed |
+| **Dark Mode** | Automatic light/dark theme based on system preference |
+| **Responsive** | Looks great on mobile, tablet, and desktop |
+| **Lightweight** | ~16KB minified, ~11KB for single theme |
+| **Customizable** | Override any style with CSS variables |
+| **Modern** | Built for modern browsers with CSS custom properties |
 
-## Why?
+## Quick Start
 
-I commonly make quick demo pages or websites with simple content. For these, I don't want to spend time styling them, but don't like the look of unstyled HTML. juice.css gives you beautiful, Apple-inspired styling with zero effort.
-
-## Who?
-
-You might want to use juice.css if you're making a simple static page or demo website and want it to look clean and modern without writing any CSS. It's perfect for:
-
-- Documentation sites
-- Prototypes and demos  
-- Simple landing pages
-- Internal tools
-- README previews
-
-juice.css is a great starting point for a custom theme, but is also fine to use on its own for a simple, Apple-like aesthetic.
-
-## How?
-
-Just add this to your `<head>`:
-
-### Automatic Theme (Recommended)
-
-Automatically switches between light and dark based on system preference:
+Add one line to your `<head>`:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.0.1/out/juice.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.1.0/out/juice.min.css">
 ```
 
-### Always Light
+That's it! Your HTML is now styled.
 
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.0.1/out/juice-light.min.css">
-```
+### Theme Options
 
-### Always Dark
+| Theme | File | Description |
+|-------|------|-------------|
+| **Auto** | `juice.min.css` | Switches light/dark with system preference |
+| **Light** | `juice-light.min.css` | Always light theme |
+| **Dark** | `juice-dark.min.css` | Always dark theme |
 
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.0.1/out/juice-dark.min.css">
-```
+> Unminified versions available without `.min` for debugging.
 
-> **Tip:** Use `.min.css` for production (smaller files). Unminified versions are also available without `.min` for debugging.
+## What Gets Styled?
 
-> **Note:** Always pin to a specific version (e.g., `@0.0.1`) in production. Using `@latest` is convenient for development but can cause unexpected changes when the library updates.
+juice.css styles all semantic HTML elements:
+
+- **Typography** - Headings, paragraphs, links, lists, blockquotes
+- **Forms** - Inputs, buttons, selects, textareas, checkboxes, radios
+- **Tables** - Responsive with hover states
+- **Code** - Inline code and code blocks
+- **Media** - Images, figures, videos
+- **Interactive** - Details/summary, dialogs, progress bars
 
 ## Theming
 
-juice.css uses CSS variables for all theming. You can customize any of these:
+Customize any aspect with CSS variables:
+
+```css
+:root {
+  --links: #ff2d55;
+  --button-base: #ff2d55;
+  --background: #fafafa;
+}
+```
+
+<details>
+<summary><strong>View all CSS variables</strong></summary>
 
 ```css
 :root {
@@ -74,12 +89,12 @@ juice.css uses CSS variables for all theming. You can customize any of these:
   --background: #f5f5f7;
   --background-alt: #ffffff;
   
-  /* Text colors */
+  /* Text */
   --text-main: #1d1d1f;
   --text-bright: #000000;
   --text-muted: #86868b;
   
-  /* Interactive elements */
+  /* Interactive */
   --links: #007aff;
   --focus: rgba(0, 122, 255, 0.4);
   --selection: rgba(0, 122, 255, 0.2);
@@ -92,103 +107,57 @@ juice.css uses CSS variables for all theming. You can customize any of these:
   /* Forms */
   --form-text: #1d1d1f;
   --form-placeholder: #86868b;
-  
-  /* Borders & dividers */
   --border: #d2d2d7;
   
-  /* Code blocks */
+  /* Code */
   --code: #1d1d1f;
-  --variable: #34c759;
-  --highlight: rgba(255, 214, 10, 0.5);
+  --code-bg: #f5f5f7;
   
-  /* UI elements */
-  --scrollbar-thumb: #d2d2d7;
-  --scrollbar-thumb-hover: #86868b;
-  --slider-thumb: #ffffff;
-  
-  /* Semantic colors */
+  /* Semantic */
   --success: #34c759;
   --warning: #ff9500;
   --error: #ff3b30;
-  
-  /* Animation */
-  --animation-duration: 0.15s;
 }
 ```
 
-## Runtime Theming
-
-Override variables at runtime without recompiling:
-
-```html
-<style>
-  :root {
-    --links: #ff2d55;
-    --button-base: #ff2d55;
-  }
-</style>
-```
-
-## Building Your Own Theme
-
-Want to customize juice.css beyond CSS variables? 
-
-1. Clone this repository
-2. Edit the source files in `src/lib/`:
-   - `variables-light.css` - Light theme colors
-   - `variables-dark.css` - Dark theme colors
-   - `base.css` - All styling (uses variables)
-3. Run `bun run build` to generate CSS files in `out/`
-
-## Development
-
-Built with [Bun](https://bun.sh) - zero dependencies!
-
-```bash
-# Install Bun (if needed)
-curl -fsSL https://bun.sh/install | bash
-
-# Clone the repo
-git clone https://github.com/andrew-bierman/juice.css.git
-cd juice.css
-
-# Start dev server with hot reload
-bun dev
-
-# Build CSS files
-bun run build
-```
-
-## Performance
-
-juice.css is served via **jsDelivr's global CDN** with:
-- Multi-CDN approach (Cloudflare, Fastly, StackPath)
-- 200+ edge locations worldwide
-- Automatic caching and compression
-- 99.9% uptime SLA
-- Free forever for open-source projects
+</details>
 
 ## Browser Support
 
-juice.css works in all modern browsers:
+| Browser | Support |
+|---------|---------|
+| Chrome | Last 2 versions |
+| Firefox | Last 2 versions |
+| Safari | Last 2 versions |
+| Edge | Last 2 versions |
+| Mobile | iOS Safari, Chrome Android |
 
-- Chrome/Edge (latest)
-- Firefox (latest)  
-- Safari (latest)
-- Mobile browsers
+## Development
 
-Legacy browser support is not a priority. juice.css uses modern CSS features like CSS variables, which are supported in all browsers released after 2016.
+```bash
+# Clone
+git clone https://github.com/andrew-bierman/juice.css.git
+cd juice.css
+
+# Install
+bun install
+
+# Dev server with hot reload
+bun dev
+
+# Build
+bun run build
+
+# Test
+bun run test
+```
 
 ## Credits
 
-juice.css builds upon the excellent work of:
-
-- [water.css](https://github.com/kognise/water.css) by [@kognise](https://github.com/kognise) - The original classless CSS framework that inspired this project
-- [Apple's Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/) - Design principles and color system
-- [Bun](https://bun.sh) - Lightning-fast JavaScript runtime used for building
-
-Special thanks to the water.css community for creating such a solid foundation!
+- [water.css](https://github.com/kognise/water.css) - The OG classless CSS framework
+- [Apple HIG](https://developer.apple.com/design/human-interface-guidelines/) - Design inspiration
+- [Bun](https://bun.sh) - Build tooling
 
 ## License
 
-MIT © [andrew-bierman](https://github.com/andrew-bierman)
+MIT © [Andrew Bierman](https://github.com/andrew-bierman)
