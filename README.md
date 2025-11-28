@@ -44,22 +44,22 @@ Just add this to your `<head>`:
 Automatically switches between light and dark based on system preference:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@1.0.0/out/juice.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.0.1/out/juice.css">
 ```
 
 ### Always Light
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@1.0.0/out/juice-light.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.0.1/out/juice-light.css">
 ```
 
 ### Always Dark
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@1.0.0/out/juice-dark.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.0.1/out/juice-dark.css">
 ```
 
-> **Note:** Always pin to a specific version (e.g., `@1.0.0`) in production. Using `@latest` is convenient for development but can cause unexpected changes when the library updates.
+> **Note:** Always pin to a specific version (e.g., `@0.0.1`) in production. Using `@latest` is convenient for development but can cause unexpected changes when the library updates.
 
 ## Theming
 
@@ -95,7 +95,7 @@ juice.css uses CSS variables for all theming. You can customize any of these:
   --border: #d2d2d7;
   
   /* Code blocks */
-  --code: #ff3b30;
+  --code: #1d1d1f;
   --variable: #34c759;
   --highlight: rgba(255, 214, 10, 0.5);
   
