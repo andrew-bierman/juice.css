@@ -44,20 +44,22 @@ Just add this to your `<head>`:
 Automatically switches between light and dark based on system preference:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@latest/out/juice.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@1.0.0/out/juice.css">
 ```
 
 ### Always Light
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@latest/out/juice-light.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@1.0.0/out/juice-light.css">
 ```
 
 ### Always Dark
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@latest/out/juice-dark.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@1.0.0/out/juice-dark.css">
 ```
+
+> **Note:** Always pin to a specific version (e.g., `@1.0.0`) in production. Using `@latest` is convenient for development but can cause unexpected changes when the library updates.
 
 ## Theming
 
