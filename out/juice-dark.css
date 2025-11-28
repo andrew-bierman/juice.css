@@ -252,6 +252,7 @@ label {
 input[type="color"] {
     height: var(--space-8);
     width: var(--space-8);
+    min-height: var(--space-8);
     padding: var(--space-1);
     cursor: pointer;
     border-radius: var(--radius-full);
@@ -523,7 +524,7 @@ details + details {
 
 summary {
     cursor: pointer;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-semibold);
     user-select: none;
     padding: var(--space-4) 0;
     list-style: none;
