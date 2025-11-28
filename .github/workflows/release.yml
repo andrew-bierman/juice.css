@@ -40,8 +40,7 @@ jobs:
                   git config user.name "github-actions[bot]"
                   git config user.email "github-actions[bot]@users.noreply.github.com"
                   git add package.json out/
-                  git commit -m "chore: bump version to ${{ inputs.version }}"
-                  git push
+                  git diff --staged --quiet || (git commit -m "chore: bump version to ${{ inputs.version }}" && git push)
 
             - name: Create tag
               run: |
