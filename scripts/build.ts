@@ -26,14 +26,47 @@ const [lightVars, darkVars, base] = await Promise.all([
 	Bun.file("src/base.css").text(),
 ]);
 
-// Indent dark vars for media query
-const indentedDarkVars = darkVars
-	.split("\n")
-	.map((line) => (line ? `\t${line}` : line))
-	.join("\n");
+// Indent content for nested selectors
+const indent = (content: string) =>
+	content
+		.split("\n")
+		.map((line) => (line ? `\t${line}` : line))
+		.join("\n");
 
-// Build juice.css (auto - switches between light/dark)
-const autoCSS = `${lightVars}\n\n@media (prefers-color-scheme: dark) {\n${indentedDarkVars}\n}\n\n${base}`;
+// Convert :root to [data-theme="X"] selector
+const toDataTheme = (content: string, theme: "light" | "dark") =>
+	content.replace(/:root\s*\{/, `[data-theme="${theme}"] {`);
+
+// Generate theme-overrides.css content
+const themeOverridesCSS = `/**
+ * Theme overrides for manual theme switching via data-theme attribute
+ * Auto-generated from variables-light.css and variables-dark.css
+ * DO NOT EDIT DIRECTLY - regenerate with: bun run build
+ */
+
+/* Force light theme */
+${toDataTheme(lightVars, "light")}
+
+/* Force dark theme */
+${toDataTheme(darkVars, "dark")}
+`;
+
+// Write theme-overrides.css to src/ for dev mode
+await Bun.write("src/theme-overrides.css", themeOverridesCSS);
+
+// Build juice.css (auto - switches between light/dark, with data-theme overrides)
+const autoCSS = `${lightVars}
+
+@media (prefers-color-scheme: dark) {
+${indent(darkVars)}
+}
+
+/* Manual theme overrides via data-theme attribute */
+${toDataTheme(lightVars, "light")}
+
+${toDataTheme(darkVars, "dark")}
+
+${base}`;
 
 // Build juice-light.css (always light)
 const lightCSS = `${lightVars}\n\n${base}`;

@@ -201,6 +201,208 @@
 
 }
 
+/* Manual theme overrides via data-theme attribute */
+/**
+ * juice.css - Light Theme Variables
+ * Apple-inspired design tokens for light mode
+ */
+
+[data-theme="light"] {
+	/* ========================================
+       DESIGN TOKENS - iOS-inspired defaults
+       Override these to customize your theme
+       ======================================== */
+
+	/* Typography Scale - iOS based (rem for scalability) */
+	--font-size-base: 1rem; /* 16px default, scales with user preferences */
+	--font-size-large-title: 2.125rem; /* 34px / 16px */
+	--font-size-title-1: 1.75rem; /* 28px / 16px */
+	--font-size-title-2: 1.375rem; /* 22px / 16px */
+	--font-size-title-3: 1.25rem; /* 20px / 16px */
+	--font-size-headline: 1.0625rem; /* 17px / 16px */
+	--font-size-body: 1.0625rem; /* 17px / 16px */
+	--font-size-callout: 1rem; /* 16px / 16px */
+	--font-size-subhead: 0.9375rem; /* 15px / 16px */
+	--font-size-footnote: 0.8125rem; /* 13px / 16px */
+	--font-size-caption: 0.75rem; /* 12px / 16px */
+
+	/* Line Heights - iOS ratios */
+	--line-height-tight: 1.2;
+	--line-height-base: 1.47; /* Apple HIG recommended (25/17) */
+	--line-height-relaxed: 1.5;
+
+	/* Font Weights */
+	--font-weight-regular: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+
+	/* Letter Spacing */
+	--letter-spacing-tight: -0.024em;
+	--letter-spacing-normal: 0;
+	--letter-spacing-wide: 0.016em;
+
+	/* Spacing Scale - 4px base unit */
+	--space-1: 0.25rem; /* 4px */
+	--space-2: 0.5rem; /* 8px */
+	--space-3: 0.75rem; /* 12px */
+	--space-4: 1rem; /* 16px */
+	--space-5: 1.25rem; /* 20px */
+	--space-6: 1.5rem; /* 24px */
+	--space-8: 2rem; /* 32px */
+	--space-9: 2.1875rem; /* 35px - SwiftUI section spacing */
+	--space-10: 2.5rem; /* 40px */
+
+	/* Border Radius - iOS style */
+	--radius-sm: 6px;
+	--radius-md: 8px;
+	--radius-lg: 12px;
+	--radius-xl: 16px;
+	--radius-full: 9999px;
+
+	/* Border Width */
+	--border-thin: 0.5px; /* iOS ultra-thin borders */
+	--border-base: 1px;
+
+	/* Touch Targets */
+	--tap-target-min: 44px; /* iOS minimum */
+
+	/* Transitions */
+	--animation-duration: 0.15s;
+	--animation-easing: ease;
+
+	/* Z-index Scale */
+	--z-base: 0;
+	--z-dropdown: 100;
+	--z-sticky: 200;
+	--z-modal: 300;
+	--z-popover: 400;
+	--z-tooltip: 500;
+
+	/* ========================================
+       COLOR PALETTE - Apple-inspired
+       ======================================== */
+
+	/* Background Colors */
+	--background-body: #ffffff;
+	--background: #f5f5f7;
+	--background-alt: #ffffff;
+
+	/* Text Colors */
+	--text-main: #1d1d1f;
+	--text-bright: #000000;
+	--text-muted: #86868b;
+
+	/* Interactive Colors */
+	--links: #007aff;
+	--focus: rgba(0, 122, 255, 0.4);
+	--selection: rgba(0, 122, 255, 0.2);
+
+	/* UI Element Colors */
+	--border: #d2d2d7;
+	--code: #1d1d1f;
+	--code-bg: #f5f5f7;
+	--highlight: rgba(255, 214, 10, 0.5);
+
+	/* Button Colors */
+	--button-base: #007aff;
+	--button-hover: #0051d5;
+	--button-text: #ffffff;
+
+	/* Form Colors */
+	--form-placeholder: #86868b;
+	--form-text: #1d1d1f;
+	--slider-thumb: #ffffff;
+
+	/* Scrollbar */
+	--scrollbar-thumb: #d2d2d7;
+	--scrollbar-thumb-hover: #86868b;
+
+	/* Semantic Colors */
+	--success: #34c759;
+	--warning: #ff9500;
+	--error: #ff3b30;
+	--variable: #34c759;
+
+	/* Select Arrow */
+	--select-arrow: url("data:image/svg+xml;charset=utf-8,%3C?xml version='1.0' encoding='utf-8'?%3E %3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' height='62.5' width='116.9' fill='%231d1d1f'%3E %3Cpath d='M115.3,1.6 C113.7,0 111.1,0 109.5,1.6 L58.5,52.7 L7.4,1.6 C5.8,0 3.2,0 1.6,1.6 C0,3.2 0,5.8 1.6,7.4 L55.5,61.3 C56.3,62.1 57.3,62.5 58.4,62.5 C59.4,62.5 60.5,62.1 61.3,61.3 L115.2,7.4 C116.9,5.8 116.9,3.2 115.3,1.6Z'/%3E %3C/svg%3E");
+
+	/* Print Colors */
+	--print-bg: #ffffff;
+	--print-text: #000000;
+	--print-border: #000000;
+	--print-alt-bg: #f2f2f2;
+	--print-link: #0000ff;
+}
+
+
+/**
+ * juice.css - Dark Theme Variables
+ * Apple-inspired design tokens for dark mode
+ *
+ * Note: Design tokens (typography, spacing, radius) are inherited from light theme.
+ * Only color values are overridden here for dark mode.
+ */
+
+[data-theme="dark"] {
+	/* ========================================
+       COLOR PALETTE - Apple-inspired Dark Mode
+       Design tokens remain the same across themes
+       ======================================== */
+
+	/* Background Colors */
+	--background-body: #000000;
+	--background: #1c1c1e;
+	--background-alt: #2c2c2e;
+
+	/* Text Colors */
+	--text-main: #f5f5f7;
+	--text-bright: #ffffff;
+	--text-muted: #8e8e93;
+
+	/* Interactive Colors */
+	--links: #0a84ff;
+	--focus: rgba(10, 132, 255, 0.5);
+	--selection: rgba(10, 132, 255, 0.3);
+
+	/* UI Element Colors */
+	--border: #38383a;
+	--code: #f5f5f7;
+	--code-bg: #1c1c1e;
+	--highlight: rgba(255, 214, 10, 0.4);
+
+	/* Button Colors */
+	--button-base: #0a84ff;
+	--button-hover: #409cff;
+	--button-text: #ffffff;
+
+	/* Form Colors */
+	--form-placeholder: #8e8e93;
+	--form-text: #f5f5f7;
+	--slider-thumb: #ffffff;
+
+	/* Scrollbar */
+	--scrollbar-thumb: #48484a;
+	--scrollbar-thumb-hover: #636366;
+
+	/* Semantic Colors */
+	--success: #30d158;
+	--warning: #ff9f0a;
+	--error: #ff453a;
+	--variable: #30d158;
+
+	/* Select Arrow */
+	--select-arrow: url("data:image/svg+xml;charset=utf-8,%3C?xml version='1.0' encoding='utf-8'?%3E %3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' height='62.5' width='116.9' fill='%23f5f5f7'%3E %3Cpath d='M115.3,1.6 C113.7,0 111.1,0 109.5,1.6 L58.5,52.7 L7.4,1.6 C5.8,0 3.2,0 1.6,1.6 C0,3.2 0,5.8 1.6,7.4 L55.5,61.3 C56.3,62.1 57.3,62.5 58.4,62.5 C59.4,62.5 60.5,62.1 61.3,61.3 L115.2,7.4 C116.9,5.8 116.9,3.2 115.3,1.6Z'/%3E %3C/svg%3E");
+
+	/* Print Colors (same for all themes) */
+	--print-bg: #ffffff;
+	--print-text: #000000;
+	--print-border: #000000;
+	--print-alt-bg: #f2f2f2;
+	--print-link: #0000ff;
+}
+
+
 /**
  * juice.css - Simple, Apple-inspired CSS
  * Drop-in styling for semantic HTML

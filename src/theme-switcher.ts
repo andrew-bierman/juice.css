@@ -1,84 +1,28 @@
 /**
  * Theme switcher for juice.css demo page
  * Manages light/dark/auto theme switching with localStorage persistence
+ *
+ * Uses data-theme attribute to override CSS prefers-color-scheme.
+ * The actual theme values come from the CSS files (variables-light.css, variables-dark.css)
+ * so there's no duplication of color values.
  */
 
 type Theme = "auto" | "light" | "dark";
-type ThemeVars = Record<string, string>;
-
-// Theme variables - matches CSS variable definitions
-const lightTheme: ThemeVars = {
-	"--background-body": "#ffffff",
-	"--background": "#f5f5f7",
-	"--background-alt": "#ffffff",
-	"--selection": "rgba(0, 122, 255, 0.2)",
-	"--text-main": "#1d1d1f",
-	"--text-bright": "#000000",
-	"--text-muted": "#86868b",
-	"--links": "#007aff",
-	"--focus": "rgba(0, 122, 255, 0.4)",
-	"--border": "#d2d2d7",
-	"--code": "#ff3b30",
-	"--button-base": "#007aff",
-	"--button-hover": "#0051d5",
-	"--scrollbar-thumb": "#d2d2d7",
-	"--scrollbar-thumb-hover": "#86868b",
-	"--form-placeholder": "#86868b",
-	"--form-text": "#1d1d1f",
-	"--variable": "#34c759",
-	"--highlight": "rgba(255, 214, 10, 0.5)",
-	"--button-text": "#ffffff",
-	"--slider-thumb": "#ffffff",
-	"--success": "#34c759",
-	"--warning": "#ff9500",
-	"--error": "#ff3b30",
-};
-
-const darkTheme: ThemeVars = {
-	"--background-body": "#000000",
-	"--background": "#1c1c1e",
-	"--background-alt": "#2c2c2e",
-	"--selection": "rgba(10, 132, 255, 0.3)",
-	"--text-main": "#f5f5f7",
-	"--text-bright": "#ffffff",
-	"--text-muted": "#8e8e93",
-	"--links": "#0a84ff",
-	"--focus": "rgba(10, 132, 255, 0.5)",
-	"--border": "#38383a",
-	"--code": "#ff453a",
-	"--button-base": "#0a84ff",
-	"--button-hover": "#409cff",
-	"--scrollbar-thumb": "#48484a",
-	"--scrollbar-thumb-hover": "#636366",
-	"--form-placeholder": "#8e8e93",
-	"--form-text": "#f5f5f7",
-	"--variable": "#30d158",
-	"--highlight": "rgba(255, 214, 10, 0.4)",
-	"--button-text": "#ffffff",
-	"--slider-thumb": "#ffffff",
-	"--success": "#30d158",
-	"--warning": "#ff9f0a",
-	"--error": "#ff453a",
-};
 
 /**
- * Apply theme by setting CSS custom properties
+ * Apply theme by setting data-theme attribute
+ * CSS handles the actual variable values via [data-theme] selectors
  */
 function setTheme(theme: Theme): void {
 	const root = document.documentElement;
 
 	if (theme === "auto") {
-		// Remove all overrides, let CSS prefers-color-scheme handle it
-		for (const key of Object.keys(lightTheme)) {
-			root.style.removeProperty(key);
-		}
+		// Remove override, let CSS prefers-color-scheme handle it
+		root.removeAttribute("data-theme");
 		localStorage.removeItem("theme");
 	} else {
-		// Apply specific theme
-		const vars = theme === "light" ? lightTheme : darkTheme;
-		for (const [key, value] of Object.entries(vars)) {
-			root.style.setProperty(key, value);
-		}
+		// Set explicit theme
+		root.setAttribute("data-theme", theme);
 		localStorage.setItem("theme", theme);
 	}
 
@@ -91,13 +35,13 @@ function setTheme(theme: Theme): void {
 function updateButtons(theme: Theme): void {
 	const themes: Theme[] = ["auto", "light", "dark"];
 
-	themes.forEach((t) => {
+	for (const t of themes) {
 		const btn = document.getElementById(`btn-${t}`);
 		if (btn) {
 			btn.style.opacity = t === theme ? "1" : "0.6";
 			btn.style.fontWeight = t === theme ? "600" : "normal";
 		}
-	});
+	}
 }
 
 /**

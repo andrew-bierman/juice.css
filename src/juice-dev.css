@@ -1,4 +1,13 @@
 /* Development version - imports source files directly */
+
+/* Default: light theme */
 @import "variables-light.css";
+
+/* Auto dark mode via media query */
 @import "variables-dark.css" (prefers-color-scheme: dark);
+
+/* Manual theme overrides - generated at build time, imported for dev */
+@import "theme-overrides.css";
+
+/* Base styles */
 @import "base.css";
