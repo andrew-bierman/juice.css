@@ -7,3 +7,5 @@
 import "./theme-switcher";
 import "./copy-button";
 import "./dialog";
+import "./syntax-highlight";
+import "./raw-toggle";

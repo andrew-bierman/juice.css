@@ -16,6 +16,11 @@ console.log("📦 Building juice.css...");
 // Clean and create directories
 await Bun.$`rm -rf dist && mkdir -p out dist`;
 
+// Read package.json for version
+const pkg = await file("package.json").json();
+const version = pkg.version;
+console.log(`📌 Version: ${version}`);
+
 // Read source files using Bun.file (faster than fs.readFileSync)
 const [lightVars, darkVars, base] = await Promise.all([
 	file("src/variables-light.css").text(),
@@ -97,6 +102,11 @@ if (!distHTMLResult.success) {
 	}
 	process.exit(1);
 }
+
+// Inject version into dist/index.html (replace {{VERSION}} placeholders)
+const distHTML = await file("dist/index.html").text();
+const versionedHTML = distHTML.replaceAll("{{VERSION}}", version);
+await write("dist/index.html", versionedHTML);
 
 console.log("✅ Build complete!");
 console.log("\n📦 Distribution files (out/) - CSS only for GitHub/CDN:");

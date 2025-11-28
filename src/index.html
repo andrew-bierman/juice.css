@@ -17,7 +17,13 @@
     </head>
     <body>
         <header>
-            <h1>juice.css</h1>
+            <h1>
+                juice.css
+                <small
+                    style="font-size: 0.4em; font-weight: normal; opacity: 0.7"
+                    >v{{VERSION}}</small
+                >
+            </h1>
             <p>
                 A drop-in collection of CSS styles to make simple websites look
                 <strong>beautiful</strong>.
@@ -40,6 +46,8 @@
                 <button id="btn-auto">Auto</button>
                 <button id="btn-light">Light</button>
                 <button id="btn-dark">Dark</button>
+                <span style="margin-left: 16px"></span>
+                <button id="toggle-raw">Raw HTML</button>
             </p>
         </header>
 
@@ -110,13 +118,13 @@
                     Automatically switches between light and dark based on
                     system preference:
                 </p>
-                <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.0.1/out/juice.css"&gt;</code></pre>
+                <pre><code class="language-html">&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@{{VERSION}}/out/juice.css"&gt;</code></pre>
 
                 <h3>Always Light</h3>
-                <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.0.1/out/juice-light.css"&gt;</code></pre>
+                <pre><code class="language-html">&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@{{VERSION}}/out/juice-light.css"&gt;</code></pre>
 
                 <h3>Always Dark</h3>
-                <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.0.1/out/juice-dark.css"&gt;</code></pre>
+                <pre><code class="language-html">&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@{{VERSION}}/out/juice-dark.css"&gt;</code></pre>
             </section>
 
             <section>
@@ -125,7 +133,7 @@
                     juice.css uses CSS variables for theming. You can customize
                     any of these:
                 </p>
-                <pre><code>:root {
+                <pre><code class="language-css">:root {
   --background-body: #ffffff;
   --background: #f5f5f7;
   --background-alt: #ffffff;
@@ -151,7 +159,7 @@
             <section>
                 <h2>Runtime Theming</h2>
                 <p>Override variables at runtime without recompiling:</p>
-                <pre><code>&lt;style&gt;
+                <pre><code class="language-html">&lt;style&gt;
   :root {
     --links: #ff2d55;
     --button-base: #ff2d55;
@@ -217,7 +225,7 @@
                     <code>const greeting = "Hello, World!";</code>
                 </p>
                 <p>Code blocks with syntax-friendly colors:</p>
-                <pre><code>function greet(name) {
+                <pre><code class="language-javascript">function greet(name) {
     return `Hello, ${name}!`;
 }
 
