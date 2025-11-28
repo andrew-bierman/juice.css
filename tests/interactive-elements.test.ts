@@ -1,22 +1,24 @@
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
 import { type Browser, chromium, type Page } from "playwright";
+import { BASE_URL, BROWSER_OPTIONS, CONTEXT_OPTIONS } from "./test-config";
 
 /**
  * Interactive Elements Tests
  * Tests that all interactive elements work properly and render correctly
  * Including dropdowns, pickers, date inputs, responsive behavior, etc.
+ *
+ * These tests verify FRAMEWORK behavior (what users get from juice.css),
+ * not demo-specific features.
  */
 describe("Interactive Elements - Functionality & Rendering", () => {
 	let browser: Browser;
 	let page: Page;
 
 	beforeAll(async () => {
-		browser = await chromium.launch({ headless: false, slowMo: 50 });
-		const context = await browser.newContext({
-			viewport: { width: 1280, height: 1024 },
-		});
+		browser = await chromium.launch(BROWSER_OPTIONS);
+		const context = await browser.newContext(CONTEXT_OPTIONS);
 		page = await context.newPage();
-		await page.goto("http://localhost:3000");
+		await page.goto(BASE_URL);
 	});
 
 	afterAll(async () => {
@@ -24,6 +26,33 @@ describe("Interactive Elements - Functionality & Rendering", () => {
 	});
 
 	describe("Select Dropdowns", () => {
+		test("select should have custom dropdown arrow", async () => {
+			const selectStyle = await page.evaluate(() => {
+				const select = document.querySelector("select");
+				if (!select) return null;
+				const styles = getComputedStyle(select);
+				return {
+					appearance: styles.appearance,
+					backgroundImage: styles.backgroundImage,
+					backgroundRepeat: styles.backgroundRepeat,
+					backgroundPosition: styles.backgroundPosition,
+					paddingRight: parseFloat(styles.paddingRight),
+					cursor: styles.cursor,
+				};
+			});
+
+			expect(selectStyle).toBeTruthy();
+			// Should have appearance: none to hide native arrow
+			expect(selectStyle?.appearance).toBe("none");
+			// Should have custom arrow via background-image
+			expect(selectStyle?.backgroundImage).not.toBe("none");
+			expect(selectStyle?.backgroundImage).toContain("url");
+			// Should have extra right padding for the arrow
+			expect(selectStyle?.paddingRight).toBeGreaterThan(20);
+			// Should have pointer cursor
+			expect(selectStyle?.cursor).toBe("pointer");
+		});
+
 		test("select should render with proper width", async () => {
 			const selectWidth = await page.evaluate(() => {
 				const select = document.querySelector("select");
@@ -261,7 +290,8 @@ describe("Interactive Elements - Functionality & Rendering", () => {
 				const styles = getComputedStyle(range);
 				return {
 					appearance:
-						(styles as any).appearance || (styles as any).webkitAppearance,
+						styles.getPropertyValue("appearance") ||
+						styles.getPropertyValue("-webkit-appearance"),
 					background: styles.background,
 					height: parseFloat(styles.height),
 				};

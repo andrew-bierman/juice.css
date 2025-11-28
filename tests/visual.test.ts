@@ -1,15 +1,20 @@
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
 import { type Browser, chromium, type Page } from "playwright";
+import { BASE_URL, BROWSER_OPTIONS, CONTEXT_OPTIONS } from "./test-config";
 
+/**
+ * Visual Regression Tests
+ *
+ * Note: Some tests here verify DEMO-specific behavior (theme switcher buttons,
+ * inline styles). These are marked with comments.
+ */
 describe("Visual Regression Tests", () => {
 	let browser: Browser;
 	let page: Page;
 
 	beforeAll(async () => {
-		browser = await chromium.launch();
-		const context = await browser.newContext({
-			viewport: { width: 1280, height: 1024 },
-		});
+		browser = await chromium.launch(BROWSER_OPTIONS);
+		const context = await browser.newContext(CONTEXT_OPTIONS);
 		page = await context.newPage();
 	});
 
@@ -18,12 +23,12 @@ describe("Visual Regression Tests", () => {
 	});
 
 	test("page should load without errors", async () => {
-		const response = await page.goto("http://localhost:3000");
+		const response = await page.goto(BASE_URL);
 		expect(response?.status()).toBe(200);
 	});
 
 	test("header buttons should use flexbox layout", async () => {
-		await page.goto("http://localhost:3000");
+		await page.goto(BASE_URL);
 
 		const headerContainer = await page
 			.locator("header p:has(button)")
@@ -40,7 +45,7 @@ describe("Visual Regression Tests", () => {
 	});
 
 	test("form inputs should be full width in demo (via custom style)", async () => {
-		await page.goto("http://localhost:3000");
+		await page.goto(BASE_URL);
 
 		// Note: The demo page adds width: 100% via inline <style> tag
 		// The framework itself doesn't enforce width: 100%
@@ -61,7 +66,7 @@ describe("Visual Regression Tests", () => {
 	});
 
 	test("range slider should be full width", async () => {
-		await page.goto("http://localhost:3000");
+		await page.goto(BASE_URL);
 
 		const rangeWidth = await page
 			.locator('input[type="range"]')
@@ -75,7 +80,7 @@ describe("Visual Regression Tests", () => {
 	});
 
 	test("color picker should be circular", async () => {
-		await page.goto("http://localhost:3000");
+		await page.goto(BASE_URL);
 
 		const colorPicker = await page
 			.locator('input[type="color"]')
@@ -95,7 +100,7 @@ describe("Visual Regression Tests", () => {
 	});
 
 	test("first input should have rounded top corners", async () => {
-		await page.goto("http://localhost:3000");
+		await page.goto(BASE_URL);
 
 		const firstInput = await page
 			.locator('fieldset input[type="text"]')
@@ -113,7 +118,7 @@ describe("Visual Regression Tests", () => {
 	});
 
 	test("theme switcher should work", async () => {
-		await page.goto("http://localhost:3000");
+		await page.goto(BASE_URL);
 
 		// Click dark theme button
 		await page.click("#btn-dark");
@@ -151,7 +156,7 @@ describe("Visual Regression Tests", () => {
 
 		for (const vp of viewports) {
 			await page.setViewportSize({ width: vp.width, height: vp.height });
-			await page.goto("http://localhost:3000");
+			await page.goto(BASE_URL);
 
 			// Check that form inputs are still full width
 			const inputWidth = await page

@@ -5,11 +5,15 @@ import {
 	chromium,
 	type Page,
 } from "playwright";
+import { BASE_URL, BROWSER_OPTIONS } from "./test-config";
 
 /**
  * Responsive Design Tests
  * Tests that juice.css renders properly across all viewport sizes
  * and maintains proper element widths, spacing, and layout
+ *
+ * These tests verify FRAMEWORK behavior (what users get from juice.css),
+ * not demo-specific features.
  */
 describe("Responsive Design - All Viewports", () => {
 	let browser: Browser;
@@ -17,7 +21,7 @@ describe("Responsive Design - All Viewports", () => {
 	let page: Page;
 
 	beforeAll(async () => {
-		browser = await chromium.launch({ headless: false });
+		browser = await chromium.launch(BROWSER_OPTIONS);
 	});
 
 	afterAll(async () => {
@@ -46,7 +50,7 @@ describe("Responsive Design - All Viewports", () => {
 					},
 				});
 				page = await context.newPage();
-				await page.goto("http://localhost:3000");
+				await page.goto(BASE_URL);
 			});
 
 			afterAll(async () => {

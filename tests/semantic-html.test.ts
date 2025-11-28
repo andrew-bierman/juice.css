@@ -1,21 +1,23 @@
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
 import { type Browser, chromium, type Page } from "playwright";
+import { BASE_URL, BROWSER_OPTIONS, CONTEXT_OPTIONS } from "./test-config";
 
 /**
  * Semantic HTML Element Tests
  * Ensures all semantic HTML elements are properly styled
+ *
+ * These tests verify FRAMEWORK behavior (what users get from juice.css),
+ * not demo-specific features.
  */
 describe("Semantic HTML Styling", () => {
 	let browser: Browser;
 	let page: Page;
 
 	beforeAll(async () => {
-		browser = await chromium.launch({ headless: false });
-		const context = await browser.newContext({
-			viewport: { width: 1280, height: 1024 },
-		});
+		browser = await chromium.launch(BROWSER_OPTIONS);
+		const context = await browser.newContext(CONTEXT_OPTIONS);
 		page = await context.newPage();
-		await page.goto("http://localhost:3000");
+		await page.goto(BASE_URL);
 	});
 
 	afterAll(async () => {

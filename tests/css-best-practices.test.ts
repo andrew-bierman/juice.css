@@ -1,21 +1,23 @@
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
 import { type Browser, chromium, type Page } from "playwright";
+import { BASE_URL, BROWSER_OPTIONS, CONTEXT_OPTIONS } from "./test-config";
 
 /**
  * CSS Best Practices Tests
  * Validates clean CSS implementation, proper variable usage, and simplicity
+ *
+ * These tests verify FRAMEWORK behavior (what users get from juice.css),
+ * not demo-specific features.
  */
 describe("CSS Best Practices", () => {
 	let browser: Browser;
 	let page: Page;
 
 	beforeAll(async () => {
-		browser = await chromium.launch({ headless: false });
-		const context = await browser.newContext({
-			viewport: { width: 1280, height: 1024 },
-		});
+		browser = await chromium.launch(BROWSER_OPTIONS);
+		const context = await browser.newContext(CONTEXT_OPTIONS);
 		page = await context.newPage();
-		await page.goto("http://localhost:3000");
+		await page.goto(BASE_URL);
 	});
 
 	afterAll(async () => {
@@ -196,15 +198,19 @@ describe("CSS Best Practices", () => {
 					inputPadding: elements.input
 						? getComputedStyle(elements.input).padding
 						: null,
-					selectPadding: elements.select
-						? getComputedStyle(elements.select).padding
+					// Select has extra right padding for the dropdown arrow
+					selectPaddingLeft: elements.select
+						? getComputedStyle(elements.select).paddingLeft
+						: null,
+					inputPaddingLeft: elements.input
+						? getComputedStyle(elements.input).paddingLeft
 						: null,
 				};
 			});
 
-			// Input and select should have similar padding
-			if (spacing.inputPadding && spacing.selectPadding) {
-				expect(spacing.inputPadding).toBe(spacing.selectPadding);
+			// Input and select should have similar left padding (right differs due to arrow)
+			if (spacing.inputPaddingLeft && spacing.selectPaddingLeft) {
+				expect(spacing.inputPaddingLeft).toBe(spacing.selectPaddingLeft);
 			}
 		});
 
@@ -291,8 +297,8 @@ describe("CSS Best Practices", () => {
 
 				return {
 					selectAppearance: select
-						? (getComputedStyle(select) as any).appearance ||
-							(getComputedStyle(select) as any).webkitAppearance
+						? getComputedStyle(select).getPropertyValue("appearance") ||
+							getComputedStyle(select).getPropertyValue("-webkit-appearance")
 						: null,
 					inputType: input ? (input as HTMLInputElement).type : null,
 				};
@@ -429,7 +435,10 @@ describe("CSS Best Practices", () => {
 				const range = document.querySelector("input[type='range']");
 				if (!range) return null;
 				const styles = getComputedStyle(range);
-				return (styles as any).appearance || (styles as any).webkitAppearance;
+				return (
+					styles.getPropertyValue("appearance") ||
+					styles.getPropertyValue("-webkit-appearance")
+				);
 			});
 
 			if (rangeAppearance !== null) {

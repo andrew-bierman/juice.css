@@ -14,8 +14,8 @@ describe("Build Process", () => {
 		expect(existsSync("out/juice-dark.css")).toBe(true);
 	});
 
-	test("should generate HTML demo file", () => {
-		expect(existsSync("out/index.html")).toBe(true);
+	test("should generate HTML demo file in dist/", () => {
+		expect(existsSync("dist/index.html")).toBe(true);
 	});
 
 	test("CSS files should not be empty", () => {
