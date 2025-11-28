@@ -1,10 +1,19 @@
 /**
  * Raw HTML toggle - allows users to see styled vs completely unstyled HTML
+ * Only shown in dev mode (localhost)
  */
 
 function initRawToggle() {
 	const rawBtn = document.getElementById("toggle-raw");
 	if (!rawBtn) return;
+
+	// Only show in dev mode
+	const isDev =
+		location.hostname === "localhost" || location.hostname === "127.0.0.1";
+	if (!isDev) {
+		rawBtn.style.display = "none";
+		return;
+	}
 
 	const allStyles = document.querySelectorAll(
 		'link[rel="stylesheet"], style',
