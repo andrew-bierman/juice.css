@@ -948,6 +948,45 @@ sub {
     bottom: -0.25em;
 }
 
+del {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+ins {
+    text-decoration: underline;
+    text-decoration-color: var(--success);
+}
+
+/* Meter - similar to progress but for gauges */
+meter {
+    width: 100%;
+    height: var(--space-3);
+    background: var(--background-alt);
+    border-radius: var(--space-1);
+    border: none;
+}
+
+meter::-webkit-meter-bar {
+    background: var(--background-alt);
+    border-radius: var(--space-1);
+}
+
+meter::-webkit-meter-optimum-value {
+    background: var(--success);
+    border-radius: var(--space-1);
+}
+
+meter::-webkit-meter-suboptimum-value {
+    background: var(--warning);
+    border-radius: var(--space-1);
+}
+
+meter::-webkit-meter-even-less-good-value {
+    background: var(--error);
+    border-radius: var(--space-1);
+}
+
 /* Address */
 address {
     font-style: normal;
