@@ -232,6 +232,7 @@ textarea {
     transition:
         box-shadow var(--animation-duration) var(--animation-easing),
         background-color var(--animation-duration) var(--animation-easing);
+    min-height: var(--tap-target-min);
 }
 
 input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(
@@ -266,6 +267,7 @@ input[type="button"] {
     font-weight: var(--font-weight-medium);
     display: inline-block;
     width: auto;
+    min-height: var(--tap-target-min);
 }
 
 button:hover,
@@ -393,6 +395,7 @@ input[type="checkbox"],
 input[type="radio"] {
     display: inline-block;
     width: auto;
+    min-height: auto;
     margin-right: var(--space-2);
     vertical-align: middle;
     cursor: pointer;
@@ -426,13 +429,18 @@ pre {
     border-radius: var(--radius-md);
     overflow-x: auto;
     border: var(--border-base) solid var(--border);
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
-pre > code {
+pre code {
     padding: 0;
     background: none;
-    word-break: normal;
-    overflow-wrap: normal;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    display: block;
 }
 
 /* Lists */
@@ -451,7 +459,7 @@ blockquote {
     color: var(--text-muted);
 }
 
-/* Tables */
+/* Tables - responsive with horizontal scroll */
 table {
     width: 100%;
     border-collapse: separate;
@@ -459,6 +467,26 @@ table {
     margin: var(--space-6) 0;
     border-radius: var(--radius-md);
     border: var(--border-base) solid var(--border);
+}
+
+/* Wrapper for responsive tables - apply to parent container */
+@media (max-width: 600px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    caption {
+        display: block;
+        width: 100%;
+    }
+
+    thead,
+    tbody {
+        display: table;
+        width: 100%;
+    }
 }
 
 th,
