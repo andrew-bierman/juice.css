@@ -14,53 +14,53 @@ type Theme = "auto" | "light" | "dark";
  * CSS handles the actual variable values via [data-theme] selectors
  */
 function setTheme(theme: Theme): void {
-    const root = document.documentElement;
+	const root = document.documentElement;
 
-    if (theme === "auto") {
-        // Remove override, let CSS prefers-color-scheme handle it
-        root.removeAttribute("data-theme");
-        localStorage.removeItem("theme");
-    } else {
-        // Set explicit theme
-        root.setAttribute("data-theme", theme);
-        localStorage.setItem("theme", theme);
-    }
+	if (theme === "auto") {
+		// Remove override, let CSS prefers-color-scheme handle it
+		root.removeAttribute("data-theme");
+		localStorage.removeItem("theme");
+	} else {
+		// Set explicit theme
+		root.setAttribute("data-theme", theme);
+		localStorage.setItem("theme", theme);
+	}
 
-    updateSelect(theme);
+	updateSelect(theme);
 }
 
 /**
  * Update select element to show active theme
  */
 function updateSelect(theme: Theme): void {
-    const select = document.getElementById("theme-select") as HTMLSelectElement;
-    if (select) {
-        select.value = theme;
-    }
+	const select = document.getElementById("theme-select") as HTMLSelectElement;
+	if (select) {
+		select.value = theme;
+	}
 }
 
 /**
  * Initialize theme switcher on page load
  */
 function init(): void {
-    const saved = localStorage.getItem("theme") as Theme | null;
+	const saved = localStorage.getItem("theme") as Theme | null;
 
-    if (saved && ["auto", "light", "dark"].includes(saved)) {
-        setTheme(saved);
-    } else {
-        updateSelect("auto");
-    }
+	if (saved && ["auto", "light", "dark"].includes(saved)) {
+		setTheme(saved);
+	} else {
+		updateSelect("auto");
+	}
 
-    // Attach event listener to theme select
-    const select = document.getElementById("theme-select") as HTMLSelectElement;
-    select?.addEventListener("change", (e) => {
-        setTheme((e.target as HTMLSelectElement).value as Theme);
-    });
+	// Attach event listener to theme select
+	const select = document.getElementById("theme-select") as HTMLSelectElement;
+	select?.addEventListener("change", (e) => {
+		setTheme((e.target as HTMLSelectElement).value as Theme);
+	});
 }
 
 // Initialize when DOM is ready
 if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+	document.addEventListener("DOMContentLoaded", init);
 } else {
-    init();
+	init();
 }
