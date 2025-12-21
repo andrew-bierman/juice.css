@@ -41,7 +41,7 @@
 Add one line to your `<head>`:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.1.0/out/juice.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrew-bierman/juice.css@0.0.2/out/juice.min.css">
 ```
 
 That's it! Your HTML is now styled.
