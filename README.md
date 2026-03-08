@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <a href="#development">Live Demo (local)</a> ·
+  <a href="https://juice-css.pages.dev/">Live Demo</a> ·
   <a href="#quick-start">Quick Start</a> ·
   <a href="#theming">Theming</a> ·
   <a href="#browser-support">Browser Support</a>
