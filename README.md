@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <a href="https://andrew-bierman.github.io/juice.css">Live Demo</a> ·
+  <a href="#development">Live Demo (local)</a> ·
   <a href="#quick-start">Quick Start</a> ·
   <a href="#theming">Theming</a> ·
   <a href="#browser-support">Browser Support</a>
@@ -141,6 +141,9 @@ cd juice.css
 
 # Install
 bun install
+
+# Install Playwright browsers (required for tests)
+bun run playwright:install
 
 # Dev server with hot reload
 bun dev
